@@ -1,0 +1,40 @@
+name: Bug report
+description: Report a reproducible problem in Nawah
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Never include API keys, platform keys, private prompts, or personal data.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options: [Windows host, Linux host, Coordinator API, Website, Deployment]
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Explain the expected and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, GPU, VRAM, local inference engine, and Nawah version.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs
+      render: shell

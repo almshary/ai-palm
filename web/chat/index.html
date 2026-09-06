@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Chat with a local AI model shared through the AI Palm volunteer network." />
+    <meta name="theme-color" content="#07140e" />
+    <title data-i18n="chatTitle">Chat — AI Palm</title>
+    <link rel="icon" href="/assets/ai-palm-mark.png?v=0.7.0" type="image/png" />
+    <link rel="stylesheet" href="/styles.css?v=0.7.0" />
+    <script src="/i18n.js?v=0.7.0" defer></script>
+  </head>
+  <body class="chat-page">
+    <header class="chat-header">
+      <a class="brand" href="/" data-i18n-aria="backHome" aria-label="Back to AI Palm"><span class="brand-mark"><img src="/assets/ai-palm-mark.png" alt="" /></span><span data-i18n="brand">AI Palm</span></a>
+      <div class="model-select-wrap"><span class="model-status-dot" id="modelStatusDot"></span><label for="modelSelect" data-i18n="model">النموذج</label><select id="modelSelect" aria-describedby="modelAvailability"><option data-i18n="searching">جاري البحث…</option></select><span id="modelAvailability" data-i18n="checkingNetwork">نتحقق من الشبكة</span></div>
+      <div class="chat-header-actions"><button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21c-2.4-2.5-3.7-5.5-3.7-9S9.6 5.5 12 3Z"></path></svg><span>EN</span></button><a class="download-link" href="/downloads/AIPalmHost.exe" download><span data-i18n="shareDevice">شارك جهازك</span> <span aria-hidden="true">↙</span></a></div>
+    </header>
+
+    <main class="chat-main">
+      <div class="conversation" id="conversation" aria-live="polite">
+        <section class="chat-empty" id="chatEmpty"><span class="empty-mark"><img src="/assets/ai-palm-mark.png" alt="" /></span><h1 data-i18n-html="chatEmptyTitle">بماذا يمكن أن يساعدك<br />النموذج المحلي؟</h1><p data-i18n="chatEmptyDesc">اختر نموذجاً متاحاً، ثم اكتب رسالتك. ستظهر الإجابة هنا أثناء توليدها على جهاز أحد المتطوعين.</p>
+          <div class="suggestion-list" aria-label="اقتراحات"><button type="button" data-prompt-ar="اشرح لي ببساطة كيف تعمل نماذج اللغة الكبيرة" data-prompt-en="Explain in simple terms how large language models work" data-i18n="suggestionExplain">اشرح فكرة معقدة ببساطة</button><button type="button" data-prompt-ar="اكتب لي مثالاً عملياً لدالة JavaScript ترتب مصفوفة من الكائنات حسب التاريخ" data-prompt-en="Write a practical JavaScript function that sorts an array of objects by date" data-i18n="suggestionCode">اكتب مثالاً برمجياً</button><button type="button" data-prompt-ar="ساعدني في وضع خطة تعلم لمدة أسبوعين لفهم أساسيات الذكاء الاصطناعي" data-prompt-en="Create a two-week learning plan for understanding AI fundamentals" data-i18n="suggestionPlan">ضع لي خطة تعلم قصيرة</button></div>
+        </section>
+      </div>
+    </main>
+
+    <div class="composer-dock"><form class="chat-composer" id="promptForm"><label class="sr-only" for="prompt" data-i18n="promptPlaceholder">اكتب رسالتك إلى النموذج</label><textarea id="prompt" rows="1" maxlength="2000" data-i18n-placeholder="promptPlaceholder" placeholder="اكتب رسالتك إلى النموذج…" required></textarea><button class="send-button" id="submitButton" type="submit" data-i18n-aria="send" aria-label="إرسال الرسالة" title="إرسال"><span aria-hidden="true">↑</span></button><div class="composer-meta"><span id="formMessage" role="status" data-i18n="chooseModelReady">اختر نموذجاً متاحاً للبدء</span><span id="charCount">0 / 2000</span></div></form><p class="privacy-line" data-i18n="privacyLine">قد تمر رسالتك عبر جهاز متطوع. لا ترسل بيانات حساسة، وتحقق من المعلومات المهمة.</p></div>
+    <script src="/app.js?v=0.7.0" defer></script>
+  </body>
+</html>

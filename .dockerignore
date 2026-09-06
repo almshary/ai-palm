@@ -1,0 +1,12 @@
+.git
+.venv
+__pycache__
+*.pyc
+*.db
+data
+dist
+host-win/bin
+host-win/obj
+production/.env
+production/.env.aapanel
+production/tests

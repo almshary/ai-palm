@@ -1,0 +1,79 @@
+(() => {
+  const storageKey = "nawah-language";
+  const dictionaries = {
+    ar: {
+      landingTitle: "نخلة AI | لنتشارك قوة حواسيبنا ليصبح الذكاء الاصطناعي متاحًا للجميع",
+      landingDescription: "نخلة AI شبكة تطوعية لمشاركة قوة الحواسيب وتشغيل نماذج الذكاء الاصطناعي المحلية للجميع.",
+      brand: "نخلة AI", homeLabel: "نخلة AI، الصفحة الرئيسية", navIdea: "الفكرة", navHow: "كيف تعمل؟", navPrivacy: "الخصوصية", startChat: "ابدأ المحادثة",
+      landingEyebrow: "شبكة تطوعية للذكاء الاصطناعي المحلي", heroTitle: "الكرم عند العرب بدأ بنخلة…<br><span>واليوم زرعنا نخلة من نوعٍ آخر.</span>",
+      heroLede: "نخلة AI — لنتشارك قوة حواسيبنا، ليصبح الذكاء الاصطناعي متاحًا للجميع.", networkAria: "حالة شبكة نخلة AI الآن",
+      tryModel: "جرّب نموذجاً متاحاً", downloadApp: "حمّل نسخة Windows", windowsVersion: "Windows 64-bit · v0.7.0", downloadLinux: "حمّل نسخة Linux", linuxVersion: "Linux · Ubuntu / Debian", downloadLinuxFull: "تحميل تطبيق Linux",
+      heroNote: "لا يحتاج التطبيق إلى فتح منفذ على جهازك، وأنت تختار متى تبدأ المشاركة ومتى توقفها.",
+      networkNow: "الشبكة الآن", findingDevices: "نبحث عن الأجهزة المتاحة", networkAvailable: "القدرة متاحة لمن يحتاجها", waitingVolunteer: "بانتظار أول جهاز متطوع", networkError: "تعذر قراءة حالة الشبكة",
+      connectedDevice: "جهاز متصل", availableModel: "نموذج متاح", registeredDevice: "جهاز مسجل", tryNow: "يمكن تجربتها الآن", updating: "جاري التحديث…", noModels: "لا توجد نماذج متصلة الآن", retrying: "سنحاول الاتصال مجدداً", enterChat: "الدخول إلى المحادثة",
+      devicesKicker: "أجهزة الشبكة", devicesTitle: "القدرة المشاركة الآن.", devicesIntro: "تعرض نخلة AI الأجهزة المتصلة حالياً والأجهزة التي شاركت سابقاً. تتحدث القائمة تلقائياً مع حالة كل جهاز.", connectedNow: "متصلة الآن", offlineNow: "غير متصلة", noConnectedDevices: "لا توجد أجهزة متصلة الآن.", noOfflineDevices: "لا توجد أجهزة غير متصلة.", modelLabel: "النموذج", lastModelLabel: "آخر نموذج", connectedStatus: "متصل", offlineStatus: "غير متصل", busyStatus: "قيد الاستخدام", useThisDevice: "استخدم هذا النموذج على هذا الجهاز", unknownGpu: "بطاقة غير معروفة", unknownModel: "نموذج غير محدد",
+      mutualBenefit: "منفعة متبادلة", manifestoTitle: "ليست سحابة تجارية جديدة.<br>إنها قدرة محلية نتشارك أثرها.", powerfulDevice: "لديك جهاز قوي؟", volunteerDesc: "اختر نموذجاً محلياً لديك، وامنح الآخرين فرصة تجربته في الوقت الذي يناسبك. التطبيق يبقى بجوار الساعة ويمكنك إيقاف المشاركة فوراً.", downloadHost: "حمّل تطبيق المضيف", cantRun: "جهازك لا يشغّل النموذج؟", visitorDesc: "اختر من النماذج التي يشاركها المتطوعون الآن، واكتب رسالتك في واجهة محادثة بسيطة. تتلقى الإجابة مباشرة أثناء توليدها.", exploreModels: "استكشف النماذج المتاحة",
+      threeSteps: "ثلاث خطوات", stepsTitle: "من نموذج محلي إلى شبكة نافعة.", stepsIntro: "صممنا المسار ليبقى القرار بيد صاحب الجهاز، من أول اتصال إلى آخر مهمة.", stepDownload: "نزّل التطبيق", stepDownloadDesc: "تطبيق مستقل لنظامي Windows وLinux يتعرف على البطاقة وذاكرة VRAM تلقائياً.", stepChoose: "اختر النموذج", stepChooseDesc: "ضع عنوان أي OpenAI-compatible API ومفتاحه إن وُجد، ثم اختر النموذج.", stepShare: "شارك عندما تريد", stepShareDesc: "ابدأ أو أوقف المشاركة من النافذة أو من أيقونة نخلة AI بجوار الساعة.",
+      clarity: "وضوح قبل كل شيء", modelStays: "النموذج يبقى على جهاز المتطوع.", safetyDesc: "لا يرفع تطبيق نخلة AI النموذج أو مفتاح API إلى المنصة. يتصل التطبيق بالخادم اتصالاً صادراً، وينفذ الطلب محلياً ثم يعيد النتيجة.", volunteerWarning: "شبكة تطوعية وليست مساحة للبيانات السرية", sensitiveWarning: "تمر الرسالة إلى جهاز متطوع لمعالجتها. لا ترسل كلمات مرور أو مفاتيح أو معلومات شخصية أو ملفات حساسة.",
+      beginEither: "ابدأ من أحد الطرفين", finalTitle: "شارك موارد جهازك أو استفد من موارد المجتمع<br>لتشغيل النماذج المحلية بسهولة.", downloadWindows: "تحميل تطبيق Windows", footerTagline: "قدرة محلية، منفعة مشتركة.", betaNotice: "نسخة تجريبية — لا ترسل بيانات حساسة",
+      switchLanguage: "Switch to English", chatTitle: "المحادثة — نخلة AI", backHome: "العودة إلى نخلة AI", model: "النموذج", checkingNetwork: "نتحقق من الشبكة", shareDevice: "شارك جهازك", chatEmptyTitle: "بماذا يمكن أن يساعدك<br>النموذج المحلي؟", chatEmptyDesc: "اختر نموذجاً متاحاً، ثم اكتب رسالتك. ستظهر الإجابة هنا أثناء توليدها على جهاز أحد المتطوعين.", suggestionExplain: "اشرح فكرة معقدة ببساطة", suggestionCode: "اكتب مثالاً برمجياً", suggestionPlan: "ضع لي خطة تعلم قصيرة", promptPlaceholder: "اكتب رسالتك إلى النموذج…", chooseModelReady: "اختر نموذجاً متاحاً للبدء", privacyLine: "قد تمر رسالتك عبر جهاز متطوع. لا ترسل بيانات حساسة، وتحقق من المعلومات المهمة.", send: "إرسال الرسالة",
+      searching: "جاري البحث…", noConnectedModels: "لا توجد نماذج متصلة", connectionCheck: "نتحقق من الشبكة", deviceAvailable: "جهاز متاح", selectedDeviceReady: "متاح لهذا الحوار", busyNow: "مشغول حالياً", noConnected: "لا توجد أجهزة متصلة", readySend: "جاهز للإرسال", busyAuto: "النموذج مشغول، سنحدّث حالته تلقائياً", noAvailable: "لا توجد نماذج متاحة الآن", networkDisconnected: "غير متصل", serverUnavailable: "تعذر الاتصال بخادم نخلة AI", answerArriving: "تصل الإجابة الآن…", sending: "جاري إرسال الرسالة…", waitingDevice: "بانتظار الجهاز المحدد…", modelThinking: "بدأ النموذج في التفكير…", requestFailed: "تعذر إكمال المهمة", unknownError: "خطأ غير معروف", yourMessage: "رسالتك", you: "أنت", viaNawah: "عبر شبكة نخلة AI", copy: "نسخ", share: "مشاركة", copied: "تم النسخ", shareOpened: "تم فتح المشاركة", copiedShare: "نُسخت للمشاركة", actionFailed: "تعذر التنفيذ", shareTitle: "نتيجة من نخلة AI", inputTokens: "الإدخال", outputTokens: "الإخراج", totalTokens: "الإجمالي", speed: "السرعة", tokenPerSec: "توكن/ث", tokenInfo: "معلومات التوكن", estimated: "تقديري أثناء الكتابة", engineUsage: "من محرك النموذج", invalidPrompt: "اكتب رسالة بين 1 و2000 حرف", unavailableNow: "النموذج غير متاح الآن", unexpectedError: "حدث خطأ غير متوقع", toolTitle: "إرسال سؤال إلى شبكة نخلة AI", toolDescription: "يرسل سؤالاً إلى نموذج محلي متاح على جهاز متطوع."
+    },
+    en: {
+      landingTitle: "AI Palm | Shared local AI for everyone",
+      landingDescription: "AI Palm is a volunteer network that shares local computing power so everyone can explore powerful AI models.",
+      brand: "AI Palm", homeLabel: "AI Palm home", navIdea: "The idea", navHow: "How it works", navPrivacy: "Privacy", startChat: "Start chatting",
+      landingEyebrow: "A volunteer network for local AI", heroTitle: "Arab generosity began with a palm tree…<br><span>Today, we have planted a different kind of palm.</span>",
+      heroLede: "AI Palm — Let’s share the power of our computers, making artificial intelligence accessible to everyone.", networkAria: "AI Palm network status",
+      tryModel: "Try an available model", downloadApp: "Download for Windows", windowsVersion: "Windows 64-bit · v0.7.0", downloadLinux: "Download for Linux", linuxVersion: "Linux · Ubuntu / Debian", downloadLinuxFull: "Download for Linux",
+      heroNote: "The app opens no inbound port on your device. You decide exactly when sharing starts and stops.",
+      networkNow: "Network now", findingDevices: "Looking for available devices", networkAvailable: "Compute is available to those who need it", waitingVolunteer: "Waiting for the first volunteer device", networkError: "Could not read network status",
+      connectedDevice: "connected device", availableModel: "available model", registeredDevice: "registered device", tryNow: "Available to try now", updating: "Updating…", noModels: "No models are connected now", retrying: "We will try again shortly", enterChat: "Open chat",
+      devicesKicker: "Network devices", devicesTitle: "Shared compute, at a glance.", devicesIntro: "AI Palm shows devices connected now and devices that previously participated. Their status updates automatically.", connectedNow: "Connected now", offlineNow: "Offline", noConnectedDevices: "No devices are connected now.", noOfflineDevices: "No offline devices.", modelLabel: "Model", lastModelLabel: "Last model", connectedStatus: "Connected", offlineStatus: "Offline", busyStatus: "In use", useThisDevice: "Use this model on this device", unknownGpu: "Unknown GPU", unknownModel: "Unspecified model",
+      mutualBenefit: "Shared benefit", manifestoTitle: "Not another commercial cloud.<br>Local compute, shared for good.", powerfulDevice: "Have a powerful device?", volunteerDesc: "Choose a local model and let others try it when it suits you. The app stays in the system tray, and you can stop sharing instantly.", downloadHost: "Download the host app", cantRun: "Cannot run the model locally?", visitorDesc: "Choose from models volunteers are sharing now and send a message in a simple chat. The response appears live as it is generated.", exploreModels: "Explore available models",
+      threeSteps: "Three steps", stepsTitle: "From a local model to a useful network.", stepsIntro: "The device owner stays in control from the first connection to the final task.", stepDownload: "Download the app", stepDownloadDesc: "Standalone Windows and Linux apps detect the GPU and VRAM automatically.", stepChoose: "Choose a model", stepChooseDesc: "Enter any OpenAI-compatible API endpoint and optional key, then select the model.", stepShare: "Share when you choose", stepShareDesc: "Start or stop from the window or the AI Palm icon in the system tray.",
+      clarity: "Clarity first", modelStays: "The model stays on the volunteer's device.", safetyDesc: "AI Palm never uploads the model or its API key. The app makes an outbound connection, runs the request locally, and returns only the result.", volunteerWarning: "A volunteer network is not a place for secrets", sensitiveWarning: "Your message is processed on a volunteer device. Do not send passwords, keys, personal information, or sensitive files.",
+      beginEither: "Start from either side", finalTitle: "Share your device’s resources or use community resources<br>to run local models with ease.", downloadWindows: "Download for Windows", footerTagline: "Local compute, shared benefit.", betaNotice: "Experimental release — do not send sensitive data",
+      switchLanguage: "التبديل إلى العربية", chatTitle: "Chat — AI Palm", backHome: "Back to AI Palm", model: "Model", checkingNetwork: "Checking the network", shareDevice: "Share your device", chatEmptyTitle: "How can the local model<br>help you today?", chatEmptyDesc: "Choose an available model and send a message. The answer appears here as it is generated on a volunteer device.", suggestionExplain: "Explain something complex simply", suggestionCode: "Write a code example", suggestionPlan: "Create a short learning plan", promptPlaceholder: "Message the model…", chooseModelReady: "Choose an available model to begin", privacyLine: "Your message may be processed by a volunteer device. Do not send sensitive data, and verify important information.", send: "Send message",
+      searching: "Searching…", noConnectedModels: "No models connected", connectionCheck: "Checking the network", deviceAvailable: "device available", selectedDeviceReady: "Ready for this chat", busyNow: "Currently busy", noConnected: "No connected devices", readySend: "Ready to send", busyAuto: "The model is busy; its status will refresh automatically", noAvailable: "No models available now", networkDisconnected: "Offline", serverUnavailable: "Could not connect to AI Palm", answerArriving: "The answer is arriving…", sending: "Sending message…", waitingDevice: "Waiting for the selected device…", modelThinking: "The model has started thinking…", requestFailed: "Could not complete the request", unknownError: "Unknown error", yourMessage: "Your message", you: "You", viaNawah: "through the AI Palm network", copy: "Copy", share: "Share", copied: "Copied", shareOpened: "Share menu opened", copiedShare: "Copied for sharing", actionFailed: "Action failed", shareTitle: "A result from AI Palm", inputTokens: "Input", outputTokens: "Output", totalTokens: "Total", speed: "Speed", tokenPerSec: "tokens/s", tokenInfo: "Token usage", estimated: "Estimated while generating", engineUsage: "Reported by the model engine", invalidPrompt: "Enter a message between 1 and 2000 characters", unavailableNow: "The model is unavailable now", unexpectedError: "Something went wrong", toolTitle: "Send a question to AI Palm", toolDescription: "Sends a question to a local model available on a volunteer device."
+    }
+  };
+
+  let language;
+  try { language = localStorage.getItem(storageKey) === "ar" ? "ar" : "en"; }
+  catch (_) { language = "en"; }
+
+  function t(key) { return dictionaries[language][key] ?? dictionaries.ar[key] ?? key; }
+  function number(value) { return new Intl.NumberFormat("en-US").format(Number(value) || 0); }
+
+  function apply() {
+    document.documentElement.lang = language;
+    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-i18n]").forEach((element) => { element.textContent = t(element.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-html]").forEach((element) => { element.innerHTML = t(element.dataset.i18nHtml); });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => { element.placeholder = t(element.dataset.i18nPlaceholder); });
+    document.querySelectorAll("[data-i18n-content]").forEach((element) => { element.content = t(element.dataset.i18nContent); });
+    document.querySelectorAll("[data-i18n-aria]").forEach((element) => { element.setAttribute("aria-label", t(element.dataset.i18nAria)); });
+    const toggle = document.querySelector("#languageToggle");
+    if (toggle) {
+      toggle.querySelector("span").textContent = language === "ar" ? "EN" : "AR";
+      toggle.setAttribute("aria-label", t("switchLanguage"));
+      toggle.title = t("switchLanguage");
+    }
+  }
+
+  function toggle() {
+    language = language === "ar" ? "en" : "ar";
+    try { localStorage.setItem(storageKey, language); } catch (_) {}
+    apply();
+    window.dispatchEvent(new CustomEvent("nawah:language-change", { detail: { language } }));
+  }
+
+  window.NawahI18n = { t, number, apply, toggle, get language() { return language; } };
+  function initialize() {
+    document.querySelector("#languageToggle")?.addEventListener("click", toggle);
+    apply();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize, { once: true });
+  else initialize();
+})();
