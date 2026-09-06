@@ -12,7 +12,8 @@
 <p align="center">
   <a href="https://nawah.almshary.site">Live website</a> ·
   <a href="CONTRIBUTING.md">Contributing</a> ·
-  <a href="SECURITY.md">Security</a>
+  <a href="SECURITY.md">Security</a> ·
+  <a href="LICENSE">MIT License</a>
 </p>
 
 > [!IMPORTANT]
@@ -400,4 +401,4 @@ Read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a pull request. For sub
 
 ## License
 
-No license file is included yet. Until the project owner selects and adds a license, copyright law reserves all rights and reuse is not automatically permitted.
+AI Palm is open-source software released under the [MIT License](LICENSE). You may use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software, provided that the copyright and license notices are preserved.
