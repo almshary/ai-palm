@@ -21,14 +21,14 @@
 
 ## Overview
 
-AI Palm lets a volunteer share access to a locally running, OpenAI-compatible language model without exposing the model server to the public internet. The host application makes outbound requests to a central coordinator, receives queued jobs, runs them against the local model, and streams the result back to the requesting browser.
+AI Palm is moving to a desktop-first experience. The application lets people discover community-shared local models, chat with a selected volunteer device, and share their own OpenAI-compatible model without exposing the model server to the public internet. A central coordinator handles presence, reservations, jobs, and live results.
 
 The repository contains:
 
-- A bilingual Arabic/English landing page and streaming chat interface.
+- A bilingual Arabic/English landing and download website.
 - A zero-dependency Python coordinator for quick local demonstrations.
 - A production FastAPI coordinator backed by PostgreSQL and Redis.
-- A native Windows host application built with .NET Windows Forms.
+- A native Windows application for exploring, chatting, and sharing, built with .NET Windows Forms.
 - A graphical Linux host application built with Python, Tkinter, and a tray icon.
 - Docker Compose and Caddy configuration for HTTPS deployment.
 - Automated tests and GitHub Actions checks for the server, web code, and both host applications.
@@ -36,14 +36,14 @@ The repository contains:
 ## How it works
 
 ```text
-Browser
-   │  submit prompt / receive streamed response
+AI Palm desktop app
+   │  discover devices / submit prompt / receive live response
    ▼
 AI Palm coordinator ─── PostgreSQL (devices and jobs)
    │                    Redis (presence, rate limits, live events)
    │ outbound polling
    ▼
-Volunteer host application
+Volunteer AI Palm app
    │ localhost / private network
    ▼
 OpenAI-compatible model server
@@ -51,7 +51,7 @@ OpenAI-compatible model server
 
 1. A host registers its device, GPU information, capabilities, and selected model.
 2. The host sends heartbeats and polls the coordinator for work using outbound connections only.
-3. A visitor selects an available model or a specific host and submits a prompt.
+3. A user selects an available model or a specific volunteer device inside the desktop app and submits a prompt.
 4. The coordinator atomically reserves the host, preventing a second job from using it concurrently.
 5. The host sends the prompt to its configured OpenAI-compatible API.
 6. Generated text and usage metrics are streamed back through the coordinator to the browser.
@@ -60,10 +60,16 @@ OpenAI-compatible model server
 ## Features
 
 - Live device availability and model filtering.
+- Desktop Explore, Chat, and Share views in the Windows application.
+- Searchable two-column device discovery with an at-a-glance local-device panel.
+- Automatic RTL/LTR direction for every prompt and response message.
+- Syntax-highlighted fenced code blocks with lossless per-block copy actions.
+- Copy actions for complete model responses and code blocks, with token usage details.
 - Optional routing to a specific host.
 - Atomic host reservation and automatic timeout recovery.
 - Streaming responses with properly directed code blocks.
-- Input, output, and total token reporting when supplied by the model engine, with estimates as a fallback.
+- Automatic Ollama, LM Studio, and llama.cpp engine detection through native API fingerprints rather than port numbers.
+- Exact input, output, total token, and generation-speed reporting whenever supplied by the detected engine; unavailable production metrics are never replaced with text-length estimates.
 - Automatic NVIDIA, AMD, and Intel GPU detection.
 - Stable random installation IDs that do not depend on MAC addresses.
 - English and Arabic user interfaces.
@@ -135,17 +141,25 @@ Use `--api-key` only if the local inference server requires one. The host talks 
 
 ### Windows
 
-The native Windows application lets a volunteer configure the AI Palm coordinator URL, a platform registration key for closed testing, the local OpenAI-compatible API URL, an optional local model API key, and the model to share.
+The Windows WebView application combines both sides of AI Palm. Users can explore online devices, choose an exact model and GPU, chat inside the app, or configure the local inference API, optional model API key, and model they want to share. The official coordinator URL is built into the application and is not exposed as an editable field.
 
 Select **Connect and start sharing** to make the device available. Closing the main window keeps the application running in the notification area; use **Exit** from the tray menu to stop sharing and close it completely.
 
-Build a self-contained 64-bit executable from PowerShell:
+Build the current self-contained 64-bit WebView application from PowerShell:
+
+```powershell
+.\build_webview_exe.ps1
+```
+
+The output is written to `dist-webview-v0.1.7\AIPalmWeb.exe`. It contains the application and .NET runtime in one file. Microsoft Edge WebView2 Runtime is also required and is already present on most supported Windows installations.
+
+The classic Windows Forms application remains available and can be built separately:
 
 ```powershell
 .\build_exe.ps1
 ```
 
-The output is written to `dist\AIPalmHost.exe`. It includes the application icon and .NET runtime and does not require Python or a separate .NET installation on the destination computer.
+Its output is written to `dist\AIPalmHost.exe`.
 
 To build the project without publishing a single-file executable:
 
@@ -388,7 +402,7 @@ Please report vulnerabilities privately as described in [`SECURITY.md`](SECURITY
 - Content moderation, abuse reporting, and comprehensive operator monitoring are not implemented.
 - The lightweight local coordinator persists hosts but keeps jobs in memory.
 - The host applications currently execute chat jobs; image capability is reserved for a later stage.
-- Usage counts may be estimated when an inference engine does not return token usage.
+- Production usage counts come from the inference engine. If an engine does not report usage, AI Palm marks the metrics unavailable instead of presenting an estimate as exact.
 - Windows release binaries require a trusted code-signing certificate to avoid unknown-publisher warnings.
 
 Before a broad public launch, add individual host accounts, one-time device pairing, stronger abuse controls, user-facing privacy/terms pages, operational alerting, and a formal retention policy.

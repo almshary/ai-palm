@@ -30,6 +30,7 @@ def register(client: TestClient, host_id: str, model: str) -> dict:
             "gpu": "Radeon RX 9070 XT",
             "gpu_vendor": "AMD",
             "vram_gb": 15.9,
+            "context_length": 131072,
             "mode": "openai",
             "model": model,
             "capabilities": ["chat"],
@@ -56,10 +57,20 @@ def test_end_to_end_model_routing_and_stable_device_id() -> None:
         assert hosts["offline_hosts"] == []
         assert {item["model"] for item in hosts["models"]} == {"model-alpha", "model-beta"}
         assert all(device["vram_gb"] == 16 for device in hosts["hosts"])
+        assert all(device["context_length"] == 131072 for device in hosts["hosts"])
 
         created = client.post(
             "/api/jobs",
-            json={"kind": "chat", "model": "model-beta", "prompt": "اكتب جوابًا تجريبيًا"},
+            json={
+                "kind": "chat",
+                "model": "model-beta",
+                "prompt": "اكتب جوابًا تجريبيًا",
+                "messages": [
+                    {"role": "user", "content": "مرحباً"},
+                    {"role": "assistant", "content": "أهلاً بك"},
+                    {"role": "user", "content": "اكتب جوابًا تجريبيًا"},
+                ],
+            },
         )
         assert created.status_code == 201, created.text
         job_id = created.json()["job"]["id"]
@@ -75,23 +86,27 @@ def test_end_to_end_model_routing_and_stable_device_id() -> None:
             headers={"X-Host-Token": beta["token"]},
         )
         assert assigned.json()["job"]["id"] == job_id
+        assert len(assigned.json()["job"]["messages"]) == 3
 
         streamed = client.post(
             f"/api/jobs/{job_id}/stream",
             headers={"X-Host-Token": beta["token"]},
-            json={"delta": "مرحباً ", "usage": {"completion_tokens": 1}},
+            json={"thinking_delta": "أحلل السؤال...", "delta": "مرحباً ", "usage": {"completion_tokens": 1}},
         )
         assert streamed.status_code == 200
         completed = client.post(
             f"/api/jobs/{job_id}/complete",
             headers={"X-Host-Token": beta["token"]},
-            json={"result": "مرحباً بالعالم", "usage": {"prompt_tokens": 4, "completion_tokens": 3}},
+            # The desktop host already streamed the answer. Completion must not
+            # resend a potentially very large result body.
+            json={"result": "", "usage": {"prompt_tokens": 4, "completion_tokens": 3}},
         )
         assert completed.status_code == 200
 
         job = client.get(f"/api/jobs/{job_id}").json()["job"]
         assert job["status"] == "completed"
-        assert job["result"] == "مرحباً بالعالم"
+        assert job["result"] == "مرحباً "
+        assert job["thinking"] == "أحلل السؤال..."
         assert job["usage"]["completion_tokens"] == 3
 
         targeted = client.post(

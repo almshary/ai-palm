@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AIPalmWeb</AssemblyName>
+    <RootNamespace>AIPalmWeb</RootNamespace>
+    <StartupObject>AIPalmWeb.WebProgram</StartupObject>
+    <ApplicationManifest>..\host-win\app.manifest</ApplicationManifest>
+    <ApplicationIcon>..\host-win\app.ico</ApplicationIcon>
+    <Version>0.1.7</Version>
+    <AssemblyVersion>0.1.7.0</AssemblyVersion>
+    <FileVersion>0.1.7.0</FileVersion>
+    <Company>AI Palm</Company>
+    <Product>AI Palm Web</Product>
+    <Description>Web-powered desktop client for the AI Palm volunteer network.</Description>
+    <NoWarn>$(NoWarn);MSB3277</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4191.47" />
+    <Compile Include="..\host-win\Program.cs" Link="ClassicHostCore.cs" />
+    <EmbeddedResource Include="..\web\assets\ai-palm-mark.png" LogicalName="AIPalm.BrandMark" />
+    <EmbeddedResource Include="ui\index.html" LogicalName="AIPalmWeb.UI.index.html" />
+    <EmbeddedResource Include="ui\styles.css" LogicalName="AIPalmWeb.UI.styles.css" />
+    <EmbeddedResource Include="ui\layout-fixes.css" LogicalName="AIPalmWeb.UI.layout-fixes.css" />
+    <EmbeddedResource Include="ui\app.js" LogicalName="AIPalmWeb.UI.app.js" />
+  </ItemGroup>
+</Project>

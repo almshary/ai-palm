@@ -2,12 +2,13 @@
   const storageKey = "nawah-language";
   const dictionaries = {
     ar: {
+      reasoningLive: "تفكير النموذج · مباشر",
       landingTitle: "نخلة AI | لنتشارك قوة حواسيبنا ليصبح الذكاء الاصطناعي متاحًا للجميع",
       landingDescription: "نخلة AI شبكة تطوعية لمشاركة قوة الحواسيب وتشغيل نماذج الذكاء الاصطناعي المحلية للجميع.",
       brand: "نخلة AI", homeLabel: "نخلة AI، الصفحة الرئيسية", navIdea: "الفكرة", navHow: "كيف تعمل؟", navPrivacy: "الخصوصية", startChat: "ابدأ المحادثة",
       landingEyebrow: "شبكة تطوعية للذكاء الاصطناعي المحلي", heroTitle: "الكرم عند العرب بدأ بنخلة…<br><span>واليوم زرعنا نخلة من نوعٍ آخر.</span>",
       heroLede: "نخلة AI — لنتشارك قوة حواسيبنا، ليصبح الذكاء الاصطناعي متاحًا للجميع.", networkAria: "حالة شبكة نخلة AI الآن",
-      tryModel: "جرّب نموذجاً متاحاً", downloadApp: "حمّل نسخة Windows", windowsVersion: "Windows 64-bit · v0.7.0", downloadLinux: "حمّل نسخة Linux", linuxVersion: "Linux · Ubuntu / Debian", downloadLinuxFull: "تحميل تطبيق Linux",
+      tryModel: "جرّب نموذجاً متاحاً", downloadApp: "حمّل نسخة Windows", windowsVersion: "Windows 64-bit · v0.9.11", downloadLinux: "حمّل نسخة Linux", linuxVersion: "Linux · Ubuntu / Debian", downloadLinuxFull: "تحميل تطبيق Linux",
       heroNote: "لا يحتاج التطبيق إلى فتح منفذ على جهازك، وأنت تختار متى تبدأ المشاركة ومتى توقفها.",
       networkNow: "الشبكة الآن", findingDevices: "نبحث عن الأجهزة المتاحة", networkAvailable: "القدرة متاحة لمن يحتاجها", waitingVolunteer: "بانتظار أول جهاز متطوع", networkError: "تعذر قراءة حالة الشبكة",
       connectedDevice: "جهاز متصل", availableModel: "نموذج متاح", registeredDevice: "جهاز مسجل", tryNow: "يمكن تجربتها الآن", updating: "جاري التحديث…", noModels: "لا توجد نماذج متصلة الآن", retrying: "سنحاول الاتصال مجدداً", enterChat: "الدخول إلى المحادثة",
@@ -20,12 +21,13 @@
       searching: "جاري البحث…", noConnectedModels: "لا توجد نماذج متصلة", connectionCheck: "نتحقق من الشبكة", deviceAvailable: "جهاز متاح", selectedDeviceReady: "متاح لهذا الحوار", busyNow: "مشغول حالياً", noConnected: "لا توجد أجهزة متصلة", readySend: "جاهز للإرسال", busyAuto: "النموذج مشغول، سنحدّث حالته تلقائياً", noAvailable: "لا توجد نماذج متاحة الآن", networkDisconnected: "غير متصل", serverUnavailable: "تعذر الاتصال بخادم نخلة AI", answerArriving: "تصل الإجابة الآن…", sending: "جاري إرسال الرسالة…", waitingDevice: "بانتظار الجهاز المحدد…", modelThinking: "بدأ النموذج في التفكير…", requestFailed: "تعذر إكمال المهمة", unknownError: "خطأ غير معروف", yourMessage: "رسالتك", you: "أنت", viaNawah: "عبر شبكة نخلة AI", copy: "نسخ", share: "مشاركة", copied: "تم النسخ", shareOpened: "تم فتح المشاركة", copiedShare: "نُسخت للمشاركة", actionFailed: "تعذر التنفيذ", shareTitle: "نتيجة من نخلة AI", inputTokens: "الإدخال", outputTokens: "الإخراج", totalTokens: "الإجمالي", speed: "السرعة", tokenPerSec: "توكن/ث", tokenInfo: "معلومات التوكن", estimated: "تقديري أثناء الكتابة", engineUsage: "من محرك النموذج", invalidPrompt: "اكتب رسالة بين 1 و2000 حرف", unavailableNow: "النموذج غير متاح الآن", unexpectedError: "حدث خطأ غير متوقع", toolTitle: "إرسال سؤال إلى شبكة نخلة AI", toolDescription: "يرسل سؤالاً إلى نموذج محلي متاح على جهاز متطوع."
     },
     en: {
+      reasoningLive: "Model reasoning · live",
       landingTitle: "AI Palm | Shared local AI for everyone",
       landingDescription: "AI Palm is a volunteer network that shares local computing power so everyone can explore powerful AI models.",
       brand: "AI Palm", homeLabel: "AI Palm home", navIdea: "The idea", navHow: "How it works", navPrivacy: "Privacy", startChat: "Start chatting",
       landingEyebrow: "A volunteer network for local AI", heroTitle: "Arab generosity began with a palm tree…<br><span>Today, we have planted a different kind of palm.</span>",
       heroLede: "AI Palm — Let’s share the power of our computers, making artificial intelligence accessible to everyone.", networkAria: "AI Palm network status",
-      tryModel: "Try an available model", downloadApp: "Download for Windows", windowsVersion: "Windows 64-bit · v0.7.0", downloadLinux: "Download for Linux", linuxVersion: "Linux · Ubuntu / Debian", downloadLinuxFull: "Download for Linux",
+      tryModel: "Try an available model", downloadApp: "Download for Windows", windowsVersion: "Windows 64-bit · v0.9.11", downloadLinux: "Download for Linux", linuxVersion: "Linux · Ubuntu / Debian", downloadLinuxFull: "Download for Linux",
       heroNote: "The app opens no inbound port on your device. You decide exactly when sharing starts and stops.",
       networkNow: "Network now", findingDevices: "Looking for available devices", networkAvailable: "Compute is available to those who need it", waitingVolunteer: "Waiting for the first volunteer device", networkError: "Could not read network status",
       connectedDevice: "connected device", availableModel: "available model", registeredDevice: "registered device", tryNow: "Available to try now", updating: "Updating…", noModels: "No models are connected now", retrying: "We will try again shortly", enterChat: "Open chat",

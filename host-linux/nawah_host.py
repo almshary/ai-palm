@@ -427,11 +427,12 @@ class NawahApp:
 
     def _run_job(self, job: dict[str, Any]) -> None:
         job_id, prompt = str(job["id"]), str(job.get("prompt", ""))
+        messages = job.get("messages") or [{"role": "user", "content": prompt}]
         self.ui(lambda: (self.set_status("running", "task", id=job_id), self.set_activity("started", id=job_id)))
         heartbeat_done = threading.Event()
         threading.Thread(target=self._heartbeat_during, args=(heartbeat_done,), daemon=True).start()
         try:
-            result, usage = self._run_model(prompt, job_id)
+            result, usage = self._run_model(prompt, messages, job_id)
             request_json(f"{self.settings['server_url']}/api/jobs/{job_id}/complete", method="POST", headers=self._headers(), body={"result": result, "usage": usage})
             self.ui(lambda: (self.set_status("ready", "model_value", model=self.settings["model"]), self.set_activity("completed", id=job_id)))
         except Exception as error:
@@ -455,8 +456,9 @@ class NawahApp:
     def _publish(self, job_id: str, delta: str, usage: dict[str, Any]) -> None:
         request_json(f"{self.settings['server_url']}/api/jobs/{job_id}/stream", method="POST", headers=self._headers(), body={"delta": delta, "usage": usage}, timeout=20)
 
-    def _run_model(self, prompt: str, job_id: str) -> tuple[str, dict[str, Any]]:
-        body = json.dumps({"model": self.settings["model"], "stream": True, "messages": [{"role": "user", "content": prompt}]}).encode("utf-8")
+    def _run_model(self, prompt: str, messages: list[dict[str, str]], job_id: str) -> tuple[str, dict[str, Any]]:
+        usage_prompt = "\n".join(str(message.get("content", "")) for message in messages)
+        body = json.dumps({"model": self.settings["model"], "stream": True, "stream_options": {"include_usage": True}, "messages": messages}).encode("utf-8")
         headers = {"Content-Type": "application/json", "Accept": "text/event-stream"}
         if self.api_key_var.get().strip():
             headers["Authorization"] = f"Bearer {self.api_key_var.get().strip()}"
@@ -470,7 +472,7 @@ class NawahApp:
         if content_type != "text/event-stream":
             payload = json.loads(response.read().decode("utf-8"))
             result = payload.get("choices", [{}])[0].get("message", {}).get("content", "") or self.t("no_answer")
-            usage = self._usage(prompt, result, started, payload.get("usage"))
+            usage = self._usage(usage_prompt, result, started, payload.get("usage"))
             self._publish(job_id, result, usage)
             return result, usage
 
@@ -493,11 +495,11 @@ class NawahApp:
                 result += delta; pending += delta
                 exact = chunk.get("usage") or exact
                 if len(pending) >= 18:
-                    self._publish(job_id, pending, self._usage(prompt, result, started))
+                    self._publish(job_id, pending, self._usage(usage_prompt, result, started))
                     pending = ""
         if pending:
-            self._publish(job_id, pending, self._usage(prompt, result, started))
-        usage = self._usage(prompt, result, started, exact)
+            self._publish(job_id, pending, self._usage(usage_prompt, result, started))
+        usage = self._usage(usage_prompt, result, started, exact)
         self._publish(job_id, "", usage)
         return result or self.t("no_answer"), usage
 

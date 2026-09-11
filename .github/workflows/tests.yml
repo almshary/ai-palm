@@ -39,3 +39,4 @@ jobs:
         with:
           dotnet-version: "10.0.x"
       - run: dotnet build host-win/NawahHost.csproj --configuration Release
+      - run: dotnet build host-win-webview/AIPalmWebHost.csproj --configuration Release

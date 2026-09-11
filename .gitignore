@@ -1,11 +1,15 @@
 __pycache__/
 *.pyc
+.pytest_cache/
 .venv/
 build/
 dist/
+dist-webview*/
 *.spec
 host-win/bin/
 host-win/obj/
+host-win-webview/bin/
+host-win-webview/obj/
 data/hosts.json
 *.db
 .env
@@ -13,6 +17,7 @@ production/.env
 production/.env.aapanel
 web/downloads/*.exe
 web/downloads/*.tar.gz
+AI-Palm-Server-Update-*.zip
 .idea/
 .vscode/
 .DS_Store

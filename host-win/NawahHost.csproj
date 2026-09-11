@@ -9,11 +9,14 @@
     <RootNamespace>NawahHost</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>app.ico</ApplicationIcon>
-    <Version>0.7.0</Version>
-    <AssemblyVersion>0.7.0.0</AssemblyVersion>
-    <FileVersion>0.7.0.0</FileVersion>
+    <Version>0.9.11</Version>
+    <AssemblyVersion>0.9.11.0</AssemblyVersion>
+    <FileVersion>0.9.11.0</FileVersion>
     <Company>AI Palm</Company>
-    <Product>AI Palm Host</Product>
-    <Description>Volunteer a local OpenAI-compatible model to the AI Palm network.</Description>
+    <Product>AI Palm</Product>
+    <Description>Discover, use, and share local AI models through the AI Palm community network.</Description>
   </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\web\assets\ai-palm-mark.png" LogicalName="AIPalm.BrandMark" />
+  </ItemGroup>
 </Project>

@@ -90,7 +90,7 @@ function renderAssistantContent(value) {
     const newline = segment.indexOf("\n");
     const language = newline >= 0 ? segment.slice(0, newline).trim() : "code";
     const code = newline >= 0 ? segment.slice(newline + 1) : segment;
-    return `<div class="code-block" dir="ltr"><div class="code-label">${escapeText(language || "code")}</div><pre><code>${highlightCode(code, language)}</code></pre></div>`;
+    return `<div class="code-block" dir="ltr"><div class="code-header"><span class="code-label">${escapeText(language || "code")}</span><button type="button" data-code-copy>${escapeText(i18n.t("copy"))}</button></div><pre><code>${highlightCode(code, language)}</code></pre></div>`;
   }).join("");
 }
 
@@ -110,9 +110,25 @@ function renderUsage(usage) {
 function renderActions() {
   return `<div class="message-actions">
     <button class="message-action" type="button" data-action="copy"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>${escapeText(i18n.t("copy"))}</button>
-    <button class="message-action" type="button" data-action="share"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="m8.2 10.8 7.6-4.5M8.2 13.2l7.6 4.5"></path></svg>${escapeText(i18n.t("share"))}</button>
     <span class="action-feedback" aria-live="polite"></span>
   </div>`;
+}
+
+function renderReasoning(value) {
+  if (!value) return "";
+  return `<details class="reasoning-panel" open><summary>${escapeText(i18n.t("reasoningLive"))}</summary><div dir="auto">${escapeText(value).replace(/\n/g, "<br>")}</div></details>`;
+}
+
+function extractCompatibilityReasoning(job) {
+  let thinking = String(job.thinking || "");
+  const result = String(job.result || "").replace(/\[\[AI_PALM_REASONING_BASE64:([A-Za-z0-9+/=]+)\]\]/g, (_, encoded) => {
+    try {
+      const bytes = Uint8Array.from(atob(encoded), (character) => character.charCodeAt(0));
+      thinking += new TextDecoder().decode(bytes);
+    } catch { /* Leave an invalid compatibility marker out of the visible answer. */ }
+    return "";
+  });
+  return { ...job, result, thinking };
 }
 
 function addTurn(job) {
@@ -129,17 +145,20 @@ function scrollToLatest(force = false) {
 }
 
 function renderJob(job) {
+  job = extractCompatibilityReasoning(job);
   jobs.set(job.id, job);
   const panel = panels.get(job.id);
   if (!panel) return;
   if (job.status === "completed") {
-    panel.innerHTML = `<div class="assistant-answer">${renderAssistantContent(job.result)}</div>${renderActions()}${renderUsage(job.usage)}`;
+    panel.innerHTML = `${renderReasoning(job.thinking)}<div class="assistant-answer">${renderAssistantContent(job.result)}</div>${renderActions()}${renderUsage(job.usage)}`;
     finishJob();
   } else if (job.status === "failed") {
     panel.innerHTML = `<p class="assistant-answer error-answer">${escapeText(i18n.t("requestFailed"))}: ${escapeText(job.error || i18n.t("unknownError"))}</p>${renderUsage(job.usage)}`;
     finishJob();
   } else if (job.status === "running" && job.result) {
-    panel.innerHTML = `<div class="assistant-answer">${renderAssistantContent(job.result)}<span class="stream-caret" aria-hidden="true"></span></div>${renderActions()}${renderUsage(job.usage)}`;
+    panel.innerHTML = `${renderReasoning(job.thinking)}<div class="assistant-answer">${renderAssistantContent(job.result)}<span class="stream-caret" aria-hidden="true"></span></div>${renderActions()}${renderUsage(job.usage)}`;
+  } else if (job.status === "running" && job.thinking) {
+    panel.innerHTML = `${renderReasoning(job.thinking)}<div class="waiting-row"><span class="typing-dots"><i></i><i></i><i></i></span><span>${escapeText(i18n.t("modelThinking"))}</span></div>`;
   } else {
     panel.innerHTML = `<div class="waiting-row"><span class="typing-dots"><i></i><i></i><i></i></span><span>${escapeText(job.note || i18n.t(job.status === "running" ? "modelThinking" : "waitingDevice"))}</span></div>`;
   }
@@ -282,20 +301,26 @@ document.querySelectorAll("[data-prompt-ar]").forEach((button) => button.addEven
 }));
 
 conversation.addEventListener("click", async (event) => {
+  const codeButton = event.target.closest("[data-code-copy]");
+  if (codeButton) {
+    const code = codeButton.closest(".code-block")?.querySelector("code")?.textContent || "";
+    if (!code) return;
+    try {
+      await writeToClipboard(code);
+      const original = codeButton.textContent;
+      codeButton.textContent = i18n.t("copied");
+      setTimeout(() => { codeButton.textContent = original; }, 1600);
+    } catch (_) { codeButton.textContent = i18n.t("actionFailed"); }
+    return;
+  }
   const button = event.target.closest("[data-action]");
   const message = button?.closest("[data-job-id]");
   const job = message ? jobs.get(message.dataset.jobId) : null;
   if (!button || !job?.result) return;
   const feedback = message.querySelector(".action-feedback");
   try {
-    if (button.dataset.action === "copy") {
-      await writeToClipboard(job.result);
-      feedback.textContent = i18n.t("copied");
-    } else {
-      const text = `${job.prompt}\n\n${job.result}`;
-      if (navigator.share) { await navigator.share({ title: i18n.t("shareTitle"), text }); feedback.textContent = i18n.t("shareOpened"); }
-      else { await writeToClipboard(text); feedback.textContent = i18n.t("copiedShare"); }
-    }
+    await writeToClipboard(job.result);
+    feedback.textContent = i18n.t("copied");
     setTimeout(() => { if (feedback) feedback.textContent = ""; }, 2200);
   } catch (error) { if (error?.name !== "AbortError" && feedback) feedback.textContent = i18n.t("actionFailed"); }
 });

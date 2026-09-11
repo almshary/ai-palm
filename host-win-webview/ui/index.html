@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'" />
+  <title>AI Palm Web</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="layout-fixes.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><img src="ai-palm-mark.png" alt="" /><div><strong>AI Palm</strong><span data-i18n="volunteerNetwork">Volunteer network</span></div></div>
+      <nav>
+        <button class="nav-item active" data-view="explore"><span>⌕</span><b data-i18n="explore">Explore</b></button>
+        <button class="nav-item" data-view="chat"><span>◯</span><b data-i18n="chat">Chat</b></button>
+        <button class="nav-item" data-view="share"><span>⇧</span><b data-i18n="share">Share my device</b></button>
+        <button class="nav-item" data-view="settings"><span>⚙</span><b data-i18n="settings">Settings</b></button>
+      </nav>
+      <div class="sidebar-foot"><i></i><span data-i18n="localAi">Local AI for everyone</span></div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div><p class="eyebrow" data-i18n="community">AI Palm community</p><h1 id="viewTitle" data-i18n="explore">Explore</h1></div>
+        <div class="top-actions"><button id="languageButton" class="ghost">العربية</button><button id="refreshButton" class="ghost" data-i18n="refresh">Refresh</button></div>
+      </header>
+
+      <section class="view active" id="exploreView">
+        <p class="lead" data-i18n="exploreLead">Discover local AI models shared by volunteers right now.</p>
+        <label class="search"><span>⌕</span><input id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search models, GPUs, or devices…" /></label>
+        <div class="metrics"><article><span data-i18n="onlineDevices">Online devices</span><strong id="onlineMetric">0</strong></article><article><span data-i18n="availableModels">Available models</span><strong id="modelMetric">0</strong></article><article><span data-i18n="registeredDevices">Registered devices</span><strong id="registeredMetric">0</strong></article></div>
+        <div class="section-heading"><div><h2 data-i18n="availableNow">Available now</h2><p id="networkCaption" data-i18n="loadingNetwork">Reading the network…</p></div></div>
+        <div class="device-grid" id="deviceGrid"></div>
+      </section>
+
+      <section class="view chat-view" id="chatView">
+        <div class="chat-heading"><div><h2 data-i18n="chat">Chat</h2><p id="chatDevice" data-i18n="chooseDevice">Choose a device from Explore</p></div><span class="live-pill" id="chatLive"><i></i><span data-i18n="ready">Ready</span><span class="context-budget" id="contextBudget" hidden><span id="contextBudgetText"></span><span class="context-meter"><b id="contextMeterFill"></b></span></span><span class="generation-track" aria-hidden="true"><b></b></span></span></div>
+        <div class="conversation" id="conversation"><div class="empty-chat" id="emptyChat"><img src="ai-palm-mark.png" alt="" /><h3 data-i18n="emptyChatTitle">How can a local model help?</h3><p data-i18n="emptyChatText">Choose an available model and send a message. The answer will stream here.</p></div></div>
+        <form class="composer" id="chatForm"><textarea id="promptInput" rows="1" maxlength="4000" data-i18n-placeholder="messagePlaceholder" placeholder="Message the local model…"></textarea><button type="submit" id="sendButton">↑</button><small id="chatStatus" data-i18n="chooseDevice">Choose a device from Explore</small></form>
+      </section>
+
+      <section class="view" id="shareView">
+        <p class="lead" data-i18n="shareLead">Connect your local model and contribute its compute when you choose.</p>
+        <div class="settings-card">
+          <div class="form-grid">
+            <label><span data-i18n="deviceName">Device name</span><input id="deviceName" /></label>
+            <label><span data-i18n="engineUrl">Local API URL</span><input id="apiUrl" dir="ltr" /></label>
+            <label><span data-i18n="registrationKey">Registration key</span><input id="platformKey" type="password" dir="ltr" data-i18n-placeholder="savedSecret" /></label>
+            <label><span data-i18n="apiKey">Local API key</span><input id="apiKey" type="password" dir="ltr" data-i18n-placeholder="optionalSavedSecret" /></label>
+            <label><span data-i18n="model">Model</span><select id="modelSelect"><option value="">—</option></select></label>
+          </div>
+          <div class="form-actions"><button class="ghost" id="findModels" type="button" data-i18n="findModels">Detect engine and models</button><button class="primary" id="saveSettings" type="button" data-i18n="save">Save settings</button><button class="primary green" id="sharingToggle" type="button" data-i18n="startSharing">Start sharing</button></div>
+          <p class="form-message" id="settingsMessage"></p>
+        </div>
+      </section>
+
+      <section class="view" id="settingsView">
+        <p class="lead" data-i18n="settingsLead">Interface and application information.</p>
+        <div class="settings-card compact"><div class="setting-row"><div><b data-i18n="language">Language</b><span data-i18n="languageHelp">Change the interface direction and language.</span></div><button class="ghost" id="languageSettings">العربية</button></div><div class="setting-row"><div><b data-i18n="interfaceEngine">Interface engine</b><span>Microsoft Edge WebView2</span></div><span class="version">AI Palm Web v0.1.7</span></div></div>
+      </section>
+    </main>
+
+    <aside class="device-rail">
+      <h2 data-i18n="myDevice">My device</h2>
+      <div class="rail-block"><div class="rail-row"><div><b data-i18n="shareCompute">Share model</b><span id="shareCaption" data-i18n="sharingOff">Sharing is off</span></div><span class="status-badge" id="sharingBadge">OFF</span></div></div>
+      <div class="rail-block"><span data-i18n="selectedModel">Selected local model</span><strong id="railModel">—</strong><small id="railContext">—</small></div>
+      <div class="rail-block"><span data-i18n="gpuStatus">GPU status</span><strong id="railGpu">—</strong><em id="railVram">—</em></div>
+      <div class="rail-block"><span data-i18n="engine">Engine</span><strong id="railEngine">—</strong></div>
+      <div class="rail-block"><span data-i18n="currentActivity">Current activity</span><strong id="railActivity">Idle</strong><small id="railDetail"></small></div>
+      <button class="rail-button" data-view="share" data-i18n="shareSettings">Share settings</button>
+    </aside>
+  </div>
+  <div class="toast" id="toast"></div>
+</body>
+</html>
