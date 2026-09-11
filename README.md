@@ -11,9 +11,16 @@
 
 <p align="center">
   <a href="https://nawah.almshary.site">Live website</a> ·
+  <a href="https://github.com/almshary/ai-palm/releases/latest">Downloads</a> ·
   <a href="CONTRIBUTING.md">Contributing</a> ·
   <a href="SECURITY.md">Security</a> ·
   <a href="LICENSE">MIT License</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/almshary/ai-palm/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/almshary/ai-palm?color=0f9d68&label=release"></a>
+  <a href="https://github.com/almshary/ai-palm/actions/workflows/tests.yml"><img alt="Tests" src="https://github.com/almshary/ai-palm/actions/workflows/tests.yml/badge.svg"></a>
+  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-ebc879"></a>
 </p>
 
 > [!IMPORTANT]
@@ -21,17 +28,60 @@
 
 ## Overview
 
-AI Palm is moving to a desktop-first experience. The application lets people discover community-shared local models, chat with a selected volunteer device, and share their own OpenAI-compatible model without exposing the model server to the public internet. A central coordinator handles presence, reservations, jobs, and live results.
+AI Palm is a desktop-first volunteer network. The application lets people discover community-shared local models, chat with a selected volunteer device, and share their own local model without exposing the inference server to the public internet. A central coordinator handles presence, device reservations, jobs, conversation history, and live results.
 
 The repository contains:
 
 - A bilingual Arabic/English landing and download website.
 - A zero-dependency Python coordinator for quick local demonstrations.
 - A production FastAPI coordinator backed by PostgreSQL and Redis.
-- A native Windows application for exploring, chatting, and sharing, built with .NET Windows Forms.
+- A bilingual Windows WebView2 application for exploring, chatting, and sharing.
 - A graphical Linux host application built with Python, Tkinter, and a tray icon.
 - Docker Compose and Caddy configuration for HTTPS deployment.
 - Automated tests and GitHub Actions checks for the server, web code, and both host applications.
+
+## Download
+
+The latest published release is [AI Palm v0.8.0](https://github.com/almshary/ai-palm/releases/tag/v0.8.0).
+
+| Platform | Package | Notes |
+| --- | --- | --- |
+| Windows 10/11 x64 | [Download AI Palm Web v0.1.7](https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip) | Self-contained `.exe`; Microsoft Edge WebView2 Runtime is required |
+| Ubuntu/Debian Linux | [Download AI Palm Host v0.7.0](https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-v0.7.0.tar.gz) | Includes installer, uninstaller, desktop entry, and tray support |
+
+Release binaries are currently unsigned. Windows may show an unknown-publisher warning until the project adopts a trusted code-signing certificate. Download hashes are available in [`SHA256SUMS.txt`](https://github.com/almshary/ai-palm/releases/download/v0.8.0/SHA256SUMS.txt).
+
+## Screenshots
+
+### Discover community models
+
+Browse available volunteer devices, compare GPUs and VRAM, search models, and open a chat on the exact device you select.
+
+![AI Palm Explore view showing community models and GPUs](docs/screenshots/ai-palm-explore.png)
+
+### Chat with Arabic and English models
+
+The conversation view streams reasoning and answers, supports automatic RTL/LTR direction, renders code separately, exposes copy actions and engine token metrics, and keeps the remaining context visible.
+
+![AI Palm Arabic chat view with a code block, token usage, and remaining context](docs/screenshots/ai-palm-chat.png)
+
+### Share a local model
+
+AI Palm detects the local inference engine, selected model, GPU, VRAM, and context size. The official platform address is built into the Windows application and is not exposed as an editable field.
+
+![AI Palm Arabic Share view with local engine and model settings](docs/screenshots/ai-palm-share.png)
+
+## What's new in v0.8.0
+
+- New desktop-first Windows WebView2 experience with Explore, Chat, Share, and Settings views.
+- Multi-turn conversations routed to a specifically selected volunteer device.
+- Live model reasoning, streamed answers, fenced code blocks, and copy controls.
+- Automatic Arabic/English direction and a mirrored RTL layout.
+- Engine-reported token usage and generation speed, plus a persistent remaining-context meter.
+- Automatic Ollama, LM Studio, and llama.cpp detection using API fingerprints rather than port assumptions.
+- Context-length registration and conversation-message support in the production coordinator.
+- Database migrations through `0004_context_messages` and a larger long-response allowance.
+- Linux multi-turn message forwarding and usage reporting improvements.
 
 ## How it works
 
@@ -54,7 +104,7 @@ OpenAI-compatible model server
 3. A user selects an available model or a specific volunteer device inside the desktop app and submits a prompt.
 4. The coordinator atomically reserves the host, preventing a second job from using it concurrently.
 5. The host sends the prompt to its configured OpenAI-compatible API.
-6. Generated text and usage metrics are streamed back through the coordinator to the browser.
+6. Reasoning, generated text, and usage metrics are streamed back through the coordinator to the desktop application.
 7. The host becomes available again when the job completes, fails, or times out.
 
 ## Features
@@ -65,6 +115,7 @@ OpenAI-compatible model server
 - Automatic RTL/LTR direction for every prompt and response message.
 - Syntax-highlighted fenced code blocks with lossless per-block copy actions.
 - Copy actions for complete model responses and code blocks, with token usage details.
+- A persistent context budget that decreases during generation and remains visible after completion.
 - Optional routing to a specific host.
 - Atomic host reservation and automatic timeout recovery.
 - Streaming responses with properly directed code blocks.
@@ -87,7 +138,8 @@ Choose the path that matches what you want to run.
 | Local proof of concept | Python 3.10 or newer; no third-party packages |
 | Production API development | Python 3.10+, dependencies in `production/requirements*.txt` |
 | Production deployment | Docker Engine, Docker Compose, a Linux VPS, and a DNS name |
-| Windows host development | Windows and the .NET 10 SDK |
+| Windows application | Windows 10/11 x64 and Microsoft Edge WebView2 Runtime |
+| Windows development | Windows and the .NET 10 SDK |
 | Linux host | Python 3, Tkinter, Pillow, and pystray |
 | Browser checks | Node.js 22 or newer |
 | Local inference | An OpenAI-compatible server such as LM Studio, vLLM, LocalAI, or Ollama |
@@ -143,7 +195,7 @@ Use `--api-key` only if the local inference server requires one. The host talks 
 
 The Windows WebView application combines both sides of AI Palm. Users can explore online devices, choose an exact model and GPU, chat inside the app, or configure the local inference API, optional model API key, and model they want to share. The official coordinator URL is built into the application and is not exposed as an editable field.
 
-Select **Connect and start sharing** to make the device available. Closing the main window keeps the application running in the notification area; use **Exit** from the tray menu to stop sharing and close it completely.
+Select **Start sharing** to make the device available. Closing the main window keeps the application running in the notification area; use **Exit** from the tray menu to stop sharing and close it completely.
 
 Build the current self-contained 64-bit WebView application from PowerShell:
 
@@ -283,7 +335,7 @@ curl https://your-domain.example/api/status
 docker compose logs --tail=100 api caddy
 ```
 
-A healthy API returns JSON containing `"ok": true`. Enter the public coordinator URL and `NAWAH_REGISTRATION_KEY` in each host application.
+A healthy API returns JSON containing `"ok": true`. The official coordinator URL is compiled into the distributed Windows application; self-hosted builds can change the default in source. Linux and command-line hosts retain configurable coordinator settings.
 
 ### Updating
 
@@ -319,7 +371,7 @@ Production application settings use the `NAWAH_` prefix.
 | `NAWAH_JOB_TIMEOUT_SECONDS` | `90` | Maximum time before an unfinished job expires |
 | `NAWAH_PUBLIC_JOBS_PER_MINUTE` | `12` | Public job submission rate limit per client |
 | `NAWAH_AUTO_CREATE_SCHEMA` | `true` | Create tables automatically in development; production uses Alembic |
-| `NAWAH_MAX_RESULT_CHARS` | `100000` | Maximum stored result length |
+| `NAWAH_MAX_RESULT_CHARS` | `1000000` | Maximum stored result length |
 
 ## API overview
 
@@ -352,12 +404,14 @@ python host-linux/nawah_host.py --self-test
 node --check web/i18n.js
 node --check web/landing.js
 node --check web/app.js
+node --check host-win-webview/ui/app.js
 ```
 
 On Windows, also run:
 
 ```powershell
 dotnet build .\host-win\NawahHost.csproj --configuration Release
+dotnet build .\host-win-webview\AIPalmWebHost.csproj --configuration Release
 ```
 
 GitHub Actions runs these checks on every push to `main` and on every pull request.
@@ -369,6 +423,7 @@ GitHub Actions runs these checks on every push to `main` and on every pull reque
 ├── .github/                 Issue templates and CI workflow
 ├── host-linux/              Python/Tkinter Linux host
 ├── host-win/                Native .NET Windows host
+├── host-win-webview/        Current WebView2 desktop interface
 ├── production/
 │   ├── app/                 FastAPI application, models, schemas, realtime layer
 │   ├── migrations/          Alembic database migrations
@@ -379,7 +434,8 @@ GitHub Actions runs these checks on every push to `main` and on every pull reque
 ├── web/                     Landing page, chat UI, translations, and assets
 ├── server.py                Standard-library local coordinator
 ├── worker.py                Command-line demo/OpenAI-compatible host
-└── build_exe.ps1            Windows single-file build script
+├── build_exe.ps1            Classic Windows single-file build script
+└── build_webview_exe.ps1    Current Windows WebView single-file build script
 ```
 
 ## Security and privacy model
@@ -402,6 +458,7 @@ Please report vulnerabilities privately as described in [`SECURITY.md`](SECURITY
 - Content moderation, abuse reporting, and comprehensive operator monitoring are not implemented.
 - The lightweight local coordinator persists hosts but keeps jobs in memory.
 - The host applications currently execute chat jobs; image capability is reserved for a later stage.
+- The current Linux application focuses on hosting and sharing; the combined Explore and Chat experience is currently available on Windows.
 - Production usage counts come from the inference engine. If an engine does not report usage, AI Palm marks the metrics unavailable instead of presenting an estimate as exact.
 - Windows release binaries require a trusted code-signing certificate to avoid unknown-publisher warnings.
 

@@ -220,6 +220,9 @@ internal sealed class WebShellForm : Form
         var screenshotIndex = Array.IndexOf(arguments, "--screenshot");
         if (screenshotIndex >= 0 && screenshotIndex + 1 < arguments.Length)
         {
+            var requestedView = viewIndex >= 0 && viewIndex + 1 < arguments.Length ? arguments[viewIndex + 1] : "explore";
+            await PrepareDocumentationScreenshotAsync(requestedView);
+            await Task.Delay(250);
             await using var stream = File.Create(Path.GetFullPath(arguments[screenshotIndex + 1]));
             await browser.CoreWebView2.CapturePreviewAsync(CoreWebView2CapturePreviewImageFormat.Png, stream);
         }
@@ -244,6 +247,79 @@ internal sealed class WebShellForm : Form
         File.WriteAllText(output, JsonSerializer.Serialize(new { ok = composerOk, title = JsonSerializer.Deserialize<string>(title), webView = true, version = AppVersion, composer }));
         exitRequested = true;
         BeginInvoke(Application.Exit);
+    }
+
+    private async Task PrepareDocumentationScreenshotAsync(string view)
+    {
+        if (view == "explore")
+        {
+            await browser.ExecuteScriptAsync("""
+                (() => {
+                  applyLanguage("en");
+                  networkHosts = [
+                    { id: "atlas", name: "Atlas", gpu: "NVIDIA GeForce RTX 4090", vram_gb: 24, model: "Llama 3.3 70B", context_length: 131072 },
+                    { id: "tiger", name: "Tiger", gpu: "AMD Radeon RX 7900 XTX", vram_gb: 24, model: "Qwen3 32B", context_length: 32768 },
+                    { id: "aurora", name: "Aurora", gpu: "Intel Arc A770", vram_gb: 16, model: "Mistral Small 24B", context_length: 32768 },
+                    { id: "cedar", name: "Cedar", gpu: "NVIDIA GeForce RTX 4080", vram_gb: 16, model: "Qwen2.5 Coder 32B", context_length: 65536 }
+                  ];
+                  onlineMetric.textContent = "4";
+                  modelMetric.textContent = "4";
+                  registeredMetric.textContent = "12";
+                  networkCaption.textContent = "4 online devices ready for a new chat";
+                  searchInput.value = "";
+                  renderHosts();
+                  showView("explore");
+                })()
+                """);
+            return;
+        }
+
+        if (view == "chat")
+        {
+            await browser.ExecuteScriptAsync("""
+                (() => {
+                  applyLanguage("ar");
+                  showView("chat");
+                  conversation.innerHTML = "";
+                  selectedHost = { id: "tiger", name: "Tiger", model: "Qwen3 32B", gpu: "AMD Radeon RX 7900 XTX", context_length: 32768 };
+                  conversationHostId = selectedHost.id;
+                  contextBudgetState = { hostId: selectedHost.id, used: 0, estimated: false };
+                  chatDevice.textContent = "Tiger · Qwen3 32B · AMD Radeon RX 7900 XTX";
+                  addTurn("اكتب مثالاً بسيطاً بلغة Python يوضح كيفية الاتصال بواجهة API.");
+                  renderJob({
+                    id: "docs-chat",
+                    status: "completed",
+                    messages: [{ role: "user", content: "اكتب مثالاً بسيطاً بلغة Python يوضح كيفية الاتصال بواجهة API." }],
+                    thinking: "سأقدّم مثالاً قصيراً وآمناً مع معالجة واضحة للاستجابة.",
+                    result: "يمكنك تمرير عنوان الخدمة إلى مكتبة requests بهذا الشكل:\n\n```python\nimport requests\n\nresponse = requests.get(endpoint)\nresponse.raise_for_status()\nprint(response.json())\n```\n\nيتحقق المثال من نجاح الطلب قبل قراءة JSON.",
+                    usage: { prompt_tokens: 3120, completion_tokens: 1228, total_tokens: 4348, tokens_per_second: 38.6 }
+                  });
+                  setComposerBusy(false);
+                  promptInput.value = "";
+                  chatStatus.textContent = t("ready");
+                  requestAnimationFrame(() => conversation.scrollTop = 0);
+                })()
+                """);
+            return;
+        }
+
+        await browser.ExecuteScriptAsync("""
+            (() => {
+              applyLanguage("ar");
+              renderState({
+                ...appState,
+                sharing: true,
+                settings: { ...appState.settings, deviceName: "Tiger", apiUrl: "http://127.0.0.1:8080/v1", model: "Qwen3.8-27B" },
+                models: ["Qwen3.8-27B", "Qwen2.5-Coder-32B"],
+                gpu: { name: "AMD Radeon RX 9070 XT", vramGb: 16 },
+                engine: { name: "llama.cpp", contextLength: 131072 },
+                status: "متصل — المشاركة مفعلة",
+                detail: "النموذج: Qwen3.8-27B"
+              });
+              fillSettings(appState);
+              showView("share");
+            })()
+            """);
     }
 
     internal void RestoreWindow()
