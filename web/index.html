@@ -1,102 +1,82 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" data-i18n-content="landingDescription" content="AI Palm is a volunteer network that shares local AI compute so everyone can explore powerful models." />
-    <meta name="theme-color" content="#07140e" />
-    <title data-i18n="landingTitle">AI Palm | Shared local AI for everyone</title>
-    <link rel="icon" href="/assets/ai-palm-mark.png?v=0.7.0" type="image/png" />
-    <link rel="stylesheet" href="/styles.css?v=0.9.11" />
-    <script src="/i18n.js?v=0.9.11" defer></script>
-  </head>
-  <body class="landing-page">
-    <header class="site-header">
-      <div class="nav-wrap">
-        <a class="brand" href="/" data-i18n-aria="homeLabel" aria-label="AI Palm home"><span class="brand-mark"><img src="/assets/ai-palm-mark.png" alt="" /></span><span data-i18n="brand">AI Palm</span></a>
-        <nav class="main-nav" aria-label="التنقل الرئيسي"><a href="#idea" data-i18n="navIdea">الفكرة</a><a href="#how" data-i18n="navHow">كيف تعمل؟</a><a href="#safety" data-i18n="navPrivacy">الخصوصية</a></nav>
-        <div class="nav-actions">
-          <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to English"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21c-2.4-2.5-3.7-5.5-3.7-9S9.6 5.5 12 3Z"></path></svg><span>EN</span></button>
-          <a class="button button-small button-ghost" href="/chat/" data-i18n="startChat">ابدأ المحادثة</a>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" data-i18n-content="landingDescription" content="Download AI Palm for Windows or Linux and join a volunteer network for shared local AI." />
+  <meta name="theme-color" content="#06140e" />
+  <title data-i18n="landingTitle">AI Palm | Local AI, shared by the community</title>
+  <link rel="icon" href="/assets/ai-palm-mark.png?v=0.8.0" type="image/png" />
+  <link rel="stylesheet" href="/styles.css?v=0.10.0" />
+  <script src="/i18n.js?v=0.10.0" defer></script>
+</head>
+<body class="landing-page download-landing">
+  <header class="site-header"><div class="nav-wrap">
+    <a class="brand" href="#top" data-i18n-aria="homeLabel"><span class="brand-mark"><img src="/assets/ai-palm-mark.png" alt="" /></span><span data-i18n="brand">AI Palm</span></a>
+    <nav class="main-nav"><a href="#downloads" data-i18n="navDownloads">Downloads</a><a href="#experience" data-i18n="navExperience">Inside the app</a><a href="#how" data-i18n="navHow">How it works</a><a href="#safety" data-i18n="navPrivacy">Privacy</a></nav>
+    <div class="nav-actions"><a class="button button-small button-ghost nav-github" href="https://github.com/almshary/ai-palm" target="_blank" rel="noreferrer">GitHub</a><button class="language-toggle" id="languageToggle" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.7 5.5 3.7 9S14.4 18.5 12 21c-2.4-2.5-3.7-5.5-3.7-9S9.6 5.5 12 3Z"></path></svg><span>AR</span></button></div>
+  </div></header>
+
+  <main id="top">
+    <section class="download-hero section-shell">
+      <div class="download-hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span><span data-i18n="landingEyebrow">A volunteer network for local AI</span></p>
+        <h1 data-i18n-html="heroDownloadTitle">Your local AI.<br><span>Shared for everyone.</span></h1>
+        <p class="hero-lede" data-i18n="heroLede">AI Palm — Let’s share the power of our computers, making artificial intelligence accessible to everyone.</p>
+        <div class="hero-actions"><a class="button button-primary hero-download" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.2 10.6 4v7.3H3V5.2Zm8.7-1.4L21 2.5v8.8h-9.3V3.8ZM3 12.5h7.6V20L3 18.8v-6.3Zm8.7 0H21v9l-9.3-1.3v-7.7Z"></path></svg><span><b data-i18n="downloadWindows">Download for Windows</b><small>Windows 10/11 · x64 · v0.1.7</small></span></a><a class="button button-secondary" href="#downloads" data-i18n="viewBothApps">View both apps</a></div>
+        <p class="hero-trust"><span>✓</span><span data-i18n="heroTrust">Open source · No inbound port · You control when sharing starts</span></p>
       </div>
-    </header>
+      <div class="app-showcase">
+        <span class="showcase-orbit orbit-one" aria-hidden="true"></span><span class="showcase-orbit orbit-two" aria-hidden="true"></span>
+        <div class="showcase-window"><div class="showcase-bar"><i></i><i></i><i></i><span>AI Palm</span></div><img src="/assets/screenshots/ai-palm-explore.png" alt="AI Palm Explore screen" /></div>
+        <div class="showcase-badge"><img src="/assets/ai-palm-mark.png" alt="" /><span><b data-i18n="desktopFirst">Desktop first</b><small data-i18n="windowsAndLinux">Windows &amp; Linux</small></span></div>
+      </div>
+    </section>
 
-    <main>
-      <section class="hero section-shell">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot"></span><span data-i18n="landingEyebrow">شبكة تطوعية للذكاء الاصطناعي المحلي</span></p>
-          <h1 data-i18n-html="heroTitle">الكرم عند العرب بدأ بنخلة…<br /><span>واليوم زرعنا نخلة من نوعٍ آخر.</span></h1>
-          <p class="hero-lede" data-i18n="heroLede">نخلة AI — لنتشارك قوة حواسيبنا، ليصبح الذكاء الاصطناعي متاحًا للجميع.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="/chat/"><span data-i18n="tryModel">جرّب نموذجاً متاحاً</span><span aria-hidden="true">↗</span></a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <span class="palm-orbit orbit-one" aria-hidden="true"></span><span class="palm-orbit orbit-two" aria-hidden="true"></span>
-          <div class="logo-stage">
-            <img class="localized-logo logo-en" src="/assets/ai-palm-logo-en.png" alt="AI Palm" />
-            <img class="localized-logo logo-ar" src="/assets/ai-palm-logo-ar.png" alt="نخلة AI" />
-          </div>
-        </div>
-      </section>
+    <section class="download-section section-shell" id="downloads">
+      <div class="section-heading download-heading"><div><p class="section-kicker" data-i18n="appsKicker">Choose your app</p><h2 data-i18n="appsTitle">Download AI Palm</h2></div><p data-i18n="appsIntro">Start with the version made for your computer. Both connect securely to the AI Palm network.</p></div>
+      <div class="platform-grid">
+        <article class="platform-card platform-windows">
+          <div class="platform-card-top"><span class="platform-icon windows-icon"><svg viewBox="0 0 24 24"><path d="M3 5.2 10.6 4v7.3H3V5.2Zm8.7-1.4L21 2.5v8.8h-9.3V3.8ZM3 12.5h7.6V20L3 18.8v-6.3Zm8.7 0H21v9l-9.3-1.3v-7.7Z"></path></svg></span><span class="recommended-pill" data-i18n="recommended">Recommended</span></div>
+          <h3>Windows</h3><p class="platform-subtitle" data-i18n="windowsAppSubtitle">Explore models, chat, and share your own local model from one app.</p>
+          <ul><li data-i18n="windowsFeatureOne">Explore community devices and models</li><li data-i18n="windowsFeatureTwo">Streaming chat, reasoning, code, and token details</li><li data-i18n="windowsFeatureThree">Share Ollama, LM Studio, or llama.cpp</li></ul>
+          <a class="button button-primary platform-download" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip"><span data-i18n="downloadWindows">Download for Windows</span><span>↓</span></a>
+          <div class="platform-meta"><span>v0.1.7</span><span>Windows 10/11</span><span>x64</span></div>
+          <p class="platform-note" data-i18n="windowsRequirement">Requires Microsoft Edge WebView2. The current build is unsigned, so Windows may show an unknown-publisher warning.</p>
+        </article>
+        <article class="platform-card platform-linux">
+          <div class="platform-card-top"><span class="platform-icon linux-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-2.8 0-4 2.2-4 5.2 0 1.6-.6 3-1.7 4.4C5.2 14 5 16.2 6 18c1 1.8 3 2.8 6 2.8s5-1 6-2.8c1-1.8.8-4-.3-5.4A7 7 0 0 1 16 8.2C16 5.2 14.8 3 12 3Z"></path><circle cx="10.3" cy="8" r=".8"></circle><circle cx="13.7" cy="8" r=".8"></circle><path d="M9.6 11.2c1.6 1 3.2 1 4.8 0M8.2 16.5c2.5 1.1 5.1 1.1 7.6 0"></path></svg></span><span class="open-pill" data-i18n="hostEdition">Host edition</span></div>
+          <h3>Linux</h3><p class="platform-subtitle" data-i18n="linuxAppSubtitle">Turn your Linux machine into a volunteer host for community requests.</p>
+          <ul><li data-i18n="linuxFeatureOne">Automatic GPU and VRAM detection</li><li data-i18n="linuxFeatureTwo">System tray controls and background hosting</li><li data-i18n="linuxFeatureThree">Installer and uninstaller included</li></ul>
+          <a class="button button-secondary platform-download" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-v0.7.0.tar.gz"><span data-i18n="downloadLinuxFull">Download for Linux</span><span>↓</span></a>
+          <div class="platform-meta"><span>v0.7.0</span><span>Ubuntu / Debian</span><span>x64</span></div>
+          <p class="platform-note" data-i18n="linuxRequirement">Linux currently focuses on hosting and sharing your local model. The full Explore and Chat experience is available on Windows.</p>
+        </article>
+      </div>
+      <div class="release-links"><a href="https://github.com/almshary/ai-palm/releases/tag/v0.8.0" target="_blank" rel="noreferrer" data-i18n="releaseNotes">Release notes</a><span>·</span><a href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/SHA256SUMS.txt" data-i18n="checksums">SHA-256 checksums</a><span>·</span><a href="https://github.com/almshary/ai-palm" target="_blank" rel="noreferrer" data-i18n="sourceCode">Source code</a></div>
+    </section>
 
-      <section class="network-stage section-shell">
-        <div class="download-cluster">
-          <div class="download-row">
-            <a class="button button-secondary download-button" href="/downloads/AIPalmHost.exe" download><span data-i18n="downloadApp">حمّل نسخة Windows</span><span class="button-meta" data-i18n="windowsVersion">Windows 64-bit · v0.9.11</span></a>
-            <a class="button button-secondary download-button" href="/downloads/ai-palm-host-linux.tar.gz" download><span data-i18n="downloadLinux">حمّل نسخة Linux</span><span class="button-meta" data-i18n="linuxVersion">Linux · Ubuntu / Debian</span></a>
-          </div>
-          <p class="download-note" data-i18n="heroNote">لا يحتاج التطبيق إلى فتح منفذ على جهازك، وأنت تختار متى تبدأ المشاركة ومتى توقفها.</p>
-        </div>
-        <aside class="network-card" data-i18n-aria="networkAria" aria-label="AI Palm network status">
-          <div class="network-card-head"><div><span class="micro-label" data-i18n="networkNow">الشبكة الآن</span><h2 id="networkTitle" data-i18n="findingDevices">نبحث عن الأجهزة المتاحة</h2></div><span class="network-signal" id="networkSignal" aria-label="جاري الاتصال"><i></i><i></i><i></i></span></div>
-          <div class="stats-row">
-            <div class="live-stat"><strong id="connectedHosts">—</strong><span data-i18n="connectedDevice">جهاز متصل</span></div>
-            <div class="live-stat"><strong id="availableModels">—</strong><span data-i18n="availableModel">نموذج متاح</span></div>
-            <div class="live-stat"><strong id="registeredHosts">—</strong><span data-i18n="registeredDevice">جهاز مسجل</span></div>
-          </div>
-          <div class="model-preview"><span class="micro-label" data-i18n="tryNow">يمكن تجربتها الآن</span><div class="model-chips" id="modelChips"><span class="model-chip muted" data-i18n="updating">جاري التحديث…</span></div></div>
-          <a class="network-link" href="/chat/"><span data-i18n="enterChat">الدخول إلى المحادثة</span><span aria-hidden="true">↗</span></a>
-        </aside>
-      </section>
+    <section class="experience-section section-shell" id="experience">
+      <div class="section-heading"><div><p class="section-kicker" data-i18n="experienceKicker">Built into the app</p><h2 data-i18n="experienceTitle">Everything happens in one place.</h2></div><p data-i18n="experienceIntro">Discover available hardware, open a chat on a specific GPU and model, or volunteer your own device.</p></div>
+      <div class="experience-grid">
+        <article class="experience-card experience-large"><div class="experience-copy"><span>01</span><h3 data-i18n="exploreTitle">Explore the network</h3><p data-i18n="exploreDesc">See the GPU, VRAM, model, and live availability before you start.</p></div><img src="/assets/screenshots/ai-palm-explore.png" alt="AI Palm Explore interface" loading="lazy" /></article>
+        <article class="experience-card"><div class="experience-copy"><span>02</span><h3 data-i18n="chatExperienceTitle">Chat naturally</h3><p data-i18n="chatExperienceDesc">Arabic and English, live reasoning, formatted code, copy actions, and context usage.</p></div><img src="/assets/screenshots/ai-palm-chat.png" alt="AI Palm Chat interface" loading="lazy" /></article>
+        <article class="experience-card"><div class="experience-copy"><span>03</span><h3 data-i18n="shareExperienceTitle">Share on your terms</h3><p data-i18n="shareExperienceDesc">Connect your local engine, choose a model, then start or stop sharing at any time.</p></div><img src="/assets/screenshots/ai-palm-share.png" alt="AI Palm Share interface" loading="lazy" /></article>
+      </div>
+    </section>
 
-      <section class="devices-section section-shell" id="devices">
-        <div class="section-heading"><div><p class="section-kicker" data-i18n="devicesKicker">Network devices</p><h2 data-i18n="devicesTitle">Shared compute, at a glance.</h2></div><p data-i18n="devicesIntro">AI Palm shows devices connected now and devices that previously participated. Their status updates automatically.</p></div>
-        <div class="device-columns">
-          <article class="device-panel connected-panel">
-            <header><div><span class="device-status-icon connected" aria-hidden="true"></span><h3 data-i18n="connectedNow">متصلة الآن</h3></div><strong id="connectedDevicesCount">0</strong></header>
-            <div class="device-list" id="connectedDevices"><p class="device-empty" data-i18n="updating">جاري التحديث…</p></div>
-          </article>
-          <article class="device-panel offline-panel">
-            <header><div><span class="device-status-icon offline" aria-hidden="true"></span><h3 data-i18n="offlineNow">غير متصلة</h3></div><strong id="offlineDevicesCount">0</strong></header>
-            <div class="device-list" id="offlineDevices"><p class="device-empty" data-i18n="updating">جاري التحديث…</p></div>
-          </article>
-        </div>
-      </section>
+    <section class="how-section section-shell" id="how">
+      <div class="section-heading centered-heading"><div><p class="section-kicker" data-i18n="threeSteps">Three steps</p><h2 data-i18n="newStepsTitle">From download to shared intelligence.</h2></div><p data-i18n="newStepsIntro">AI Palm detects your setup and keeps the experience simple.</p></div>
+      <ol class="new-steps"><li><span class="step-number">1</span><div class="step-symbol">↓</div><h3 data-i18n="stepDownload">Download the app</h3><p data-i18n="newStepDownloadDesc">Choose Windows or Linux and install the app on your device.</p></li><li><span class="step-number">2</span><div class="step-symbol">◇</div><h3 data-i18n="stepConnectEngine">Connect your local engine</h3><p data-i18n="stepConnectEngineDesc">AI Palm detects Ollama, LM Studio, and llama.cpp by their API fingerprints.</p></li><li><span class="step-number">3</span><div class="step-symbol">↗</div><h3 data-i18n="stepUseOrShare">Explore or share</h3><p data-i18n="stepUseOrShareDesc">Use a community model or make your own available when you choose.</p></li></ol>
+    </section>
 
-      <section class="manifesto section-shell" id="idea">
-        <p class="section-kicker" data-i18n="mutualBenefit">منفعة متبادلة</p><h2 data-i18n-html="manifestoTitle">ليست سحابة تجارية جديدة.<br />إنها قدرة محلية نتشارك أثرها.</h2>
-        <div class="audience-grid">
-          <article class="audience-card volunteer-card"><span class="card-index">01</span><div class="card-icon" aria-hidden="true">◫</div><h3 data-i18n="powerfulDevice">لديك جهاز قوي؟</h3><p data-i18n="volunteerDesc">اختر نموذجاً محلياً لديك، وامنح الآخرين فرصة تجربته في الوقت الذي يناسبك. التطبيق يبقى بجوار الساعة ويمكنك إيقاف المشاركة فوراً.</p><a href="/downloads/AIPalmHost.exe" download><span data-i18n="downloadHost">حمّل تطبيق المضيف</span> <span aria-hidden="true">←</span></a></article>
-          <article class="audience-card visitor-card"><span class="card-index">02</span><div class="card-icon" aria-hidden="true">✦</div><h3 data-i18n="cantRun">جهازك لا يشغّل النموذج؟</h3><p data-i18n="visitorDesc">اختر من النماذج التي يشاركها المتطوعون الآن، واكتب رسالتك في واجهة محادثة بسيطة. تتلقى الإجابة مباشرة أثناء توليدها.</p><a href="/chat/"><span data-i18n="exploreModels">استكشف النماذج المتاحة</span> <span aria-hidden="true">←</span></a></article>
-        </div>
-      </section>
+    <section class="network-proof section-shell" aria-live="polite"><div class="network-proof-copy"><span class="network-signal" id="networkSignal"><i></i><i></i><i></i></span><div><p class="section-kicker" data-i18n="networkNow">Network now</p><h2 id="networkTitle" data-i18n="findingDevices">Looking for available devices</h2></div></div><div class="proof-stats"><div><strong id="connectedHosts">—</strong><span data-i18n="connectedDevice">connected device</span></div><div><strong id="availableModels">—</strong><span data-i18n="availableModel">available model</span></div><div><strong id="registeredHosts">—</strong><span data-i18n="registeredDevice">registered device</span></div></div></section>
 
-      <section class="steps-section section-shell" id="how">
-        <div class="section-heading"><div><p class="section-kicker" data-i18n="threeSteps">ثلاث خطوات</p><h2 data-i18n="stepsTitle">من نموذج محلي إلى شبكة نافعة.</h2></div><p data-i18n="stepsIntro">صممنا المسار ليبقى القرار بيد صاحب الجهاز، من أول اتصال إلى آخر مهمة.</p></div>
-        <ol class="steps-list"><li><span>1</span><div><h3 data-i18n="stepDownload">Download the app</h3><p data-i18n="stepDownloadDesc">Standalone Windows and Linux apps detect the GPU and VRAM automatically.</p></div></li><li><span>2</span><div><h3 data-i18n="stepChoose">Choose a model</h3><p data-i18n="stepChooseDesc">Enter any OpenAI-compatible API endpoint and optional key, then select the model.</p></div></li><li><span>3</span><div><h3 data-i18n="stepShare">Share when you choose</h3><p data-i18n="stepShareDesc">Start or stop from the window or the AI Palm icon in the system tray.</p></div></li></ol>
-      </section>
+    <section class="safety-section section-shell" id="safety"><div class="safety-copy"><p class="section-kicker" data-i18n="privacyByDesign">Privacy by design</p><h2 data-i18n="modelStays">The model stays on the volunteer's device.</h2><p data-i18n="safetyDesc">AI Palm never uploads the model or its API key. The app makes an outbound connection, runs the request locally, and returns only the result.</p></div><div class="trust-grid"><div><span>↗</span><b data-i18n="outboundOnly">Outbound connection only</b><small data-i18n="outboundOnlyDesc">No router port forwarding is required.</small></div><div><span>1</span><b data-i18n="oneTaskPerGpu">One task per GPU</b><small data-i18n="oneTaskPerGpuDesc">Busy devices are reserved until the task finishes.</small></div><div><span>⌁</span><b data-i18n="localCredentials">Credentials stay local</b><small data-i18n="localCredentialsDesc">Your local API key is never published.</small></div></div></section>
 
-      <section class="safety-section section-shell" id="safety">
-        <div class="safety-copy"><p class="section-kicker" data-i18n="clarity">Clarity first</p><h2 data-i18n="modelStays">The model stays on the volunteer's device.</h2><p data-i18n="safetyDesc">AI Palm never uploads the model or its API key. The app makes an outbound connection, runs the request locally, and returns only the result.</p></div>
-        <div class="notice-card"><span class="notice-icon" aria-hidden="true">!</span><div><strong data-i18n="volunteerWarning">شبكة تطوعية وليست مساحة للبيانات السرية</strong><p data-i18n="sensitiveWarning">تمر الرسالة إلى جهاز متطوع لمعالجتها. لا ترسل كلمات مرور أو مفاتيح أو معلومات شخصية أو ملفات حساسة.</p></div></div>
-      </section>
-
-      <section class="final-cta section-shell"><span class="cta-orbit" aria-hidden="true"></span><p class="section-kicker" data-i18n="beginEither">ابدأ من أحد الطرفين</p><h2 data-i18n-html="finalTitle">شارك موارد جهازك أو استفد من موارد المجتمع<br />لتشغيل النماذج المحلية بسهولة.</h2><div class="hero-actions centered"><a class="button button-primary" href="/chat/" data-i18n="startChat">ابدأ المحادثة</a><a class="button button-secondary" href="/downloads/AIPalmHost.exe" download data-i18n="downloadWindows">تحميل تطبيق Windows</a><a class="button button-secondary" href="/downloads/ai-palm-host-linux.tar.gz" download data-i18n="downloadLinuxFull">تحميل تطبيق Linux</a></div></section>
-    </main>
-
-    <footer class="site-footer section-shell"><a class="brand" href="/"><span class="brand-mark small"><img src="/assets/ai-palm-mark.png" alt="" /></span><span data-i18n="brand">AI Palm</span></a><p data-i18n="footerTagline">قدرة محلية، منفعة مشتركة.</p><span data-i18n="betaNotice">نسخة تجريبية — لا ترسل بيانات حساسة</span></footer>
-    <script src="/landing.js?v=0.9.11" defer></script>
-  </body>
+    <section class="final-download section-shell"><img src="/assets/ai-palm-mark.png" alt="" /><p class="section-kicker" data-i18n="readyKicker">Ready to join?</p><h2 data-i18n="readyTitle">Plant a different kind of palm.</h2><p data-i18n="readyDesc">Download AI Palm and help make local artificial intelligence available to everyone.</p><div class="hero-actions centered"><a class="button button-primary" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip" data-i18n="downloadWindows">Download for Windows</a><a class="button button-secondary" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-v0.7.0.tar.gz" data-i18n="downloadLinuxFull">Download for Linux</a></div></section>
+  </main>
+  <footer class="site-footer section-shell"><a class="brand" href="#top"><span class="brand-mark small"><img src="/assets/ai-palm-mark.png" alt="" /></span><span data-i18n="brand">AI Palm</span></a><p data-i18n="footerTagline">Local compute, shared benefit.</p><a href="https://github.com/almshary/ai-palm" target="_blank" rel="noreferrer">GitHub · MIT License</a></footer>
+  <script src="/landing.js?v=0.10.0" defer></script>
+</body>
 </html>
