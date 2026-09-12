@@ -8,7 +8,7 @@
   <title data-i18n="landingTitle">AI Palm | Local AI, shared by the community</title>
   <link rel="icon" href="/assets/ai-palm-mark.png?v=0.8.0" type="image/png" />
   <link rel="stylesheet" href="/styles.css?v=0.10.0" />
-  <script src="/i18n.js?v=0.10.0" defer></script>
+  <script src="/i18n.js?v=0.10.1" defer></script>
 </head>
 <body class="landing-page download-landing">
   <header class="site-header"><div class="nav-wrap">
@@ -45,12 +45,12 @@
           <p class="platform-note" data-i18n="windowsRequirement">Requires Microsoft Edge WebView2. The current build is unsigned, so Windows may show an unknown-publisher warning.</p>
         </article>
         <article class="platform-card platform-linux">
-          <div class="platform-card-top"><span class="platform-icon linux-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-2.8 0-4 2.2-4 5.2 0 1.6-.6 3-1.7 4.4C5.2 14 5 16.2 6 18c1 1.8 3 2.8 6 2.8s5-1 6-2.8c1-1.8.8-4-.3-5.4A7 7 0 0 1 16 8.2C16 5.2 14.8 3 12 3Z"></path><circle cx="10.3" cy="8" r=".8"></circle><circle cx="13.7" cy="8" r=".8"></circle><path d="M9.6 11.2c1.6 1 3.2 1 4.8 0M8.2 16.5c2.5 1.1 5.1 1.1 7.6 0"></path></svg></span><span class="open-pill" data-i18n="hostEdition">Host edition</span></div>
-          <h3>Linux</h3><p class="platform-subtitle" data-i18n="linuxAppSubtitle">Turn your Linux machine into a volunteer host for community requests.</p>
-          <ul><li data-i18n="linuxFeatureOne">Automatic GPU and VRAM detection</li><li data-i18n="linuxFeatureTwo">System tray controls and background hosting</li><li data-i18n="linuxFeatureThree">Installer and uninstaller included</li></ul>
-          <a class="button button-secondary platform-download" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-v0.7.0.tar.gz"><span data-i18n="downloadLinuxFull">Download for Linux</span><span>↓</span></a>
-          <div class="platform-meta"><span>v0.7.0</span><span>Ubuntu / Debian</span><span>x64</span></div>
-          <p class="platform-note" data-i18n="linuxRequirement">Linux currently focuses on hosting and sharing your local model. The full Explore and Chat experience is available on Windows.</p>
+          <div class="platform-card-top"><span class="platform-icon linux-icon"><svg viewBox="0 0 24 24"><path d="M12 3c-2.8 0-4 2.2-4 5.2 0 1.6-.6 3-1.7 4.4C5.2 14 5 16.2 6 18c1 1.8 3 2.8 6 2.8s5-1 6-2.8c1-1.8.8-4-.3-5.4A7 7 0 0 1 16 8.2C16 5.2 14.8 3 12 3Z"></path><circle cx="10.3" cy="8" r=".8"></circle><circle cx="13.7" cy="8" r=".8"></circle><path d="M9.6 11.2c1.6 1 3.2 1 4.8 0M8.2 16.5c2.5 1.1 5.1 1.1 7.6 0"></path></svg></span><span class="open-pill" data-i18n="hostEdition">Full app</span></div>
+          <h3>Linux</h3><p class="platform-subtitle" data-i18n="linuxAppSubtitle">Explore, chat, and share with the same complete experience as Windows.</p>
+          <ul><li data-i18n="linuxFeatureOne">Complete Explore, Chat, and Share interface</li><li data-i18n="linuxFeatureTwo">Arabic and English with RTL and LTR</li><li data-i18n="linuxFeatureThree">Background operation through the system tray</li></ul>
+          <a class="button button-secondary platform-download" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-x64-v0.1.7.tar.gz"><span data-i18n="downloadLinuxFull">Download for Linux</span><span>↓</span></a>
+          <div class="platform-meta"><span>v0.1.7</span><span>Ubuntu / Debian</span><span>x64</span></div>
+          <p class="platform-note" data-i18n="linuxRequirement">The full Explore, Chat, Share, and Settings experience is now available on Linux through WebKitGTK.</p>
         </article>
       </div>
       <div class="release-links"><a href="https://github.com/almshary/ai-palm/releases/tag/v0.8.0" target="_blank" rel="noreferrer" data-i18n="releaseNotes">Release notes</a><span>·</span><a href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/SHA256SUMS.txt" data-i18n="checksums">SHA-256 checksums</a><span>·</span><a href="https://github.com/almshary/ai-palm" target="_blank" rel="noreferrer" data-i18n="sourceCode">Source code</a></div>
@@ -74,7 +74,7 @@
 
     <section class="safety-section section-shell" id="safety"><div class="safety-copy"><p class="section-kicker" data-i18n="privacyByDesign">Privacy by design</p><h2 data-i18n="modelStays">The model stays on the volunteer's device.</h2><p data-i18n="safetyDesc">AI Palm never uploads the model or its API key. The app makes an outbound connection, runs the request locally, and returns only the result.</p></div><div class="trust-grid"><div><span>↗</span><b data-i18n="outboundOnly">Outbound connection only</b><small data-i18n="outboundOnlyDesc">No router port forwarding is required.</small></div><div><span>1</span><b data-i18n="oneTaskPerGpu">One task per GPU</b><small data-i18n="oneTaskPerGpuDesc">Busy devices are reserved until the task finishes.</small></div><div><span>⌁</span><b data-i18n="localCredentials">Credentials stay local</b><small data-i18n="localCredentialsDesc">Your local API key is never published.</small></div></div></section>
 
-    <section class="final-download section-shell"><img src="/assets/ai-palm-mark.png" alt="" /><p class="section-kicker" data-i18n="readyKicker">Ready to join?</p><h2 data-i18n="readyTitle">Plant a different kind of palm.</h2><p data-i18n="readyDesc">Download AI Palm and help make local artificial intelligence available to everyone.</p><div class="hero-actions centered"><a class="button button-primary" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip" data-i18n="downloadWindows">Download for Windows</a><a class="button button-secondary" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-v0.7.0.tar.gz" data-i18n="downloadLinuxFull">Download for Linux</a></div></section>
+    <section class="final-download section-shell"><img src="/assets/ai-palm-mark.png" alt="" /><p class="section-kicker" data-i18n="readyKicker">Ready to join?</p><h2 data-i18n="readyTitle">Plant a different kind of palm.</h2><p data-i18n="readyDesc">Download AI Palm and help make local artificial intelligence available to everyone.</p><div class="hero-actions centered"><a class="button button-primary" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip" data-i18n="downloadWindows">Download for Windows</a><a class="button button-secondary" href="https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-x64-v0.1.7.tar.gz" data-i18n="downloadLinuxFull">Download for Linux</a></div></section>
   </main>
   <footer class="site-footer section-shell"><a class="brand" href="#top"><span class="brand-mark small"><img src="/assets/ai-palm-mark.png" alt="" /></span><span data-i18n="brand">AI Palm</span></a><p data-i18n="footerTagline">Local compute, shared benefit.</p><a href="https://github.com/almshary/ai-palm" target="_blank" rel="noreferrer">GitHub · MIT License</a></footer>
   <script src="/landing.js?v=0.10.0" defer></script>

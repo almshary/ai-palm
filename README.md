@@ -35,8 +35,8 @@ The repository contains:
 - A bilingual Arabic/English landing and download website.
 - A zero-dependency Python coordinator for quick local demonstrations.
 - A production FastAPI coordinator backed by PostgreSQL and Redis.
-- A bilingual Windows WebView2 application for exploring, chatting, and sharing.
-- A graphical Linux host application built with Python, Tkinter, and a tray icon.
+- A shared bilingual desktop interface for exploring, chatting, sharing, and settings on Windows and Linux.
+- Native Windows WebView2 and Linux WebKitGTK shells, plus the earlier Tkinter Linux host as a compatibility fallback.
 - Docker Compose and Caddy configuration for HTTPS deployment.
 - Automated tests and GitHub Actions checks for the server, web code, and both host applications.
 
@@ -47,7 +47,7 @@ The latest published release is [AI Palm v0.8.0](https://github.com/almshary/ai-
 | Platform | Package | Notes |
 | --- | --- | --- |
 | Windows 10/11 x64 | [Download AI Palm Web v0.1.7](https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Windows-x64-v0.1.7.zip) | Self-contained `.exe`; Microsoft Edge WebView2 Runtime is required |
-| Ubuntu/Debian Linux | [Download AI Palm Host v0.7.0](https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-v0.7.0.tar.gz) | Includes installer, uninstaller, desktop entry, and tray support |
+| Ubuntu/Debian Linux x64 | [Download AI Palm Web v0.1.7](https://github.com/almshary/ai-palm/releases/download/v0.8.0/AI-Palm-Linux-x64-v0.1.7.tar.gz) | Full Explore, Chat, Share, and Settings app using WebKitGTK |
 
 Release binaries are currently unsigned. Windows may show an unknown-publisher warning until the project adopts a trusted code-signing certificate. Download hashes are available in [`SHA256SUMS.txt`](https://github.com/almshary/ai-palm/releases/download/v0.8.0/SHA256SUMS.txt).
 
@@ -82,6 +82,7 @@ AI Palm detects the local inference engine, selected model, GPU, VRAM, and conte
 - Context-length registration and conversation-message support in the production coordinator.
 - Database migrations through `0004_context_messages` and a larger long-response allowance.
 - Linux multi-turn message forwarding and usage reporting improvements.
+- Full Linux desktop parity using the exact same HTML, CSS, and JavaScript interface as Windows.
 
 ## How it works
 
@@ -140,7 +141,7 @@ Choose the path that matches what you want to run.
 | Production deployment | Docker Engine, Docker Compose, a Linux VPS, and a DNS name |
 | Windows application | Windows 10/11 x64 and Microsoft Edge WebView2 Runtime |
 | Windows development | Windows and the .NET 10 SDK |
-| Linux host | Python 3, Tkinter, Pillow, and pystray |
+| Linux application | Python 3, WebKitGTK 4.1, GTK 3, pywebview, Pillow, and pystray |
 | Browser checks | Node.js 22 or newer |
 | Local inference | An OpenAI-compatible server such as LM Studio, vLLM, LocalAI, or Ollama |
 
@@ -227,27 +228,27 @@ Release builds are unsigned by default and may trigger Microsoft Defender SmartS
 
 ### Linux
 
-On Ubuntu or Debian, install the system packages:
+On Ubuntu or Debian, install the WebKitGTK system packages:
 
 ```bash
 sudo apt update
-sudo apt install python3 python3-tk python3-venv
+sudo apt install python3-venv python3-gi python3-gi-cairo gir1.2-gtk-3.0 gir1.2-webkit2-4.1
 ```
 
-Install the host application:
+Install the full desktop application:
 
 ```bash
-cd host-linux
+cd host-linux-webview
 chmod +x install.sh uninstall.sh
 ./install.sh
 ```
 
-Launch **AI Palm Host** from the applications menu. Settings are stored with user-only permissions under `~/.config/nawah-host`. The model API key is held in memory and is not saved.
+Launch **AI Palm** from the applications menu. Linux uses the same Explore, Chat, Share, Settings, Arabic/English, RTL/LTR, reasoning, code, token, and context interface as Windows. Settings are stored with user-only permissions under `~/.config/ai-palm`. The model API key is held in memory and is not saved.
 
 To remove the Linux application:
 
 ```bash
-cd host-linux
+cd host-linux-webview
 ./uninstall.sh
 ```
 
@@ -335,7 +336,7 @@ curl https://your-domain.example/api/status
 docker compose logs --tail=100 api caddy
 ```
 
-A healthy API returns JSON containing `"ok": true`. The official coordinator URL is compiled into the distributed Windows application; self-hosted builds can change the default in source. Linux and command-line hosts retain configurable coordinator settings.
+A healthy API returns JSON containing `"ok": true`. The official coordinator URL is kept in the Windows and Linux source and hidden from their interfaces; self-hosted builds can change it in source. The earlier command-line and Tkinter hosts retain configurable coordinator settings.
 
 ### Updating
 
@@ -401,6 +402,8 @@ Install the production development requirements, then run:
 python -m pytest production/tests/test_api.py -q
 python -m py_compile host-linux/nawah_host.py
 python host-linux/nawah_host.py --self-test
+python -m py_compile host-linux-webview/aipalm_linux.py
+python host-linux-webview/aipalm_linux.py --self-test
 node --check web/i18n.js
 node --check web/landing.js
 node --check web/app.js
@@ -422,6 +425,7 @@ GitHub Actions runs these checks on every push to `main` and on every pull reque
 .
 ├── .github/                 Issue templates and CI workflow
 ├── host-linux/              Python/Tkinter Linux host
+├── host-linux-webview/      Full Linux WebKitGTK desktop app using the shared UI
 ├── host-win/                Native .NET Windows host
 ├── host-win-webview/        Current WebView2 desktop interface
 ├── production/
@@ -458,7 +462,7 @@ Please report vulnerabilities privately as described in [`SECURITY.md`](SECURITY
 - Content moderation, abuse reporting, and comprehensive operator monitoring are not implemented.
 - The lightweight local coordinator persists hosts but keeps jobs in memory.
 - The host applications currently execute chat jobs; image capability is reserved for a later stage.
-- The current Linux application focuses on hosting and sharing; the combined Explore and Chat experience is currently available on Windows.
+- Linux and Windows share the same application UI. Their native shells differ: WebKitGTK on Linux and WebView2 on Windows.
 - Production usage counts come from the inference engine. If an engine does not report usage, AI Palm marks the metrics unavailable instead of presenting an estimate as exact.
 - Windows release binaries require a trusted code-signing certificate to avoid unknown-publisher warnings.
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'" />
   <title>AI Palm Web</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="layout-fixes.css" />
@@ -59,7 +59,7 @@
 
       <section class="view" id="settingsView">
         <p class="lead" data-i18n="settingsLead">Interface and application information.</p>
-        <div class="settings-card compact"><div class="setting-row"><div><b data-i18n="language">Language</b><span data-i18n="languageHelp">Change the interface direction and language.</span></div><button class="ghost" id="languageSettings">العربية</button></div><div class="setting-row"><div><b data-i18n="interfaceEngine">Interface engine</b><span>Microsoft Edge WebView2</span></div><span class="version">AI Palm Web v0.1.7</span></div></div>
+        <div class="settings-card compact"><div class="setting-row"><div><b data-i18n="language">Language</b><span data-i18n="languageHelp">Change the interface direction and language.</span></div><button class="ghost" id="languageSettings">العربية</button></div><div class="setting-row"><div><b data-i18n="interfaceEngine">Interface engine</b><span id="interfaceEngineName">Microsoft Edge WebView2</span></div><span class="version">AI Palm Web v0.1.7</span></div></div>
       </section>
     </main>
 
